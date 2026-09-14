@@ -11,31 +11,15 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme">
     <!-- Coloration syntaxique -->
     <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css"> -->
-
     <!-- Reveal.js (local) -->
     <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
     <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/white.css" id="theme">
     <!-- Coloration syntaxique -->
     <link rel="stylesheet" href="node_modules/reveal.js/plugin/highlight/monokai.css">
 
-    <style>
-    /* Quelques réglages sobres, à adapter */
-    :root {
-        --r-main-font: "Source Sans Pro", system-ui, sans-serif;
-        --r-heading-font: "Source Sans Pro", system-ui, sans-serif;
-        --r-heading-text-transform: none;   /* pas de MAJUSCULES automatiques */
-        --accent: #1f4e79;
-    }
-    .reveal h1, .reveal h2, .reveal h3 { color: var(--accent); font-weight: 600; }
-    .reveal section { text-align: left; }        /* titre centré via .center */
-    .reveal .center { text-align: center; }
-    .reveal .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; align-items: center; }
-    .reveal .small { font-size: 0.7em; }
-    .reveal .ref { color: #666; font-size: 0.55em; }
-    /* Démo interactive */
-    #demo-bar { height: 22px; background: var(--accent); width: 50%; border-radius: 3px; transition: width .15s; }
-    #demo-slider { width: 100%; }
-    </style>
+    <!-- Styles propres à la présentation -->
+    <link rel="stylesheet" href="custom.css">
+
 </head>
 
 <body>
@@ -44,20 +28,22 @@
 
     <!-- 1. Titre -->
     <section class="center">
-      <h1>Titre de la présentation</h1>
-      <p>Prénom Nom<br><span class="small">Laboratoire — Date</span></p>
-      <aside class="notes">Notes de l'orateur : visibles avec la touche S.</aside>
+      <h1>Centre de calculs et modèles d'IA</h1>
+      <p>Ivanhoé Botcazou<br><span class="small">Doctorant en intelligence artificielle au LERIA </span></p>
+      <p><br><span class="small">22 Octobre 2026</span></p>
+      <aside class="notes">Mes notes visibles avec la touche S.</aside>
     </section>
 
-    <!-- 2. Plan -->
+    
+    <!-- 2. Au programme -->
     <section>
-      <h2>Plan</h2>
+      <h2>Au programme</h2>
       <ol>
-        <li class="fragment">Contexte</li>
-        <li class="fragment">Méthode</li>
-        <li class="fragment">Résultats</li>
+        <li class="fragment">IA : modélisation - apprentissage - prédiction</li>
+        <li class="fragment">Ressources de calcul et de stockage</li>
+        <li class="fragment">Cas particulier : les modèles de langues</li>
+        <li class="fragment">Lien avec mes travaux de thèse</li>
       </ol>
-      <p class="small">Les éléments <code>.fragment</code> apparaissent un à un.</p>
     </section>
 
     <!-- 3. Slides verticales : une sous-pile pour un même thème -->

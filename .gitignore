@@ -1,0 +1,27 @@
+# Dépendances (réinstallables via npm install)
+node_modules/
+
+# Exports générés
+*.pdf
+slides.pdf
+
+#Packages 
+package.json
+package-lock.json
+
+# Archives téléchargées
+*.zip
+
+# Logs npm
+npm-debug.log*
+.npm/
+
+# Éditeurs
+.vscode/
+.idea/
+*.swp
+*~
+
+# Systèmes de fichiers
+.DS_Store
+Thumbs.db

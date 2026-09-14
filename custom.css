@@ -1,0 +1,20 @@
+/* Quelques réglages sobres, à adapter */
+
+:root {
+    --r-main-font: "Source Sans Pro", system-ui, sans-serif;
+    --r-heading-font: "Source Sans Pro", system-ui, sans-serif;
+    --r-heading-text-transform: none;   /* pas de MAJUSCULES automatiques */
+    --accent: #1f4e79;
+}
+.reveal h1, .reveal h2, .reveal h3 { color: var(--accent); font-weight: 600; }
+.reveal section { text-align: left; }        /* titre centré via .center */
+.reveal .center { text-align: center; }
+.reveal .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; align-items: center; }
+.reveal .small { font-size: 0.7em; }
+.reveal .ref { color: #666; font-size: 0.55em; }
+/* Démo interactive */
+#demo-bar { height: 22px; background: var(--accent); width: 50%; border-radius: 3px; transition: width .15s; }
+#demo-slider { width: 100%; }
+
+.reveal .toc li::marker { color: var(--accent); font-weight: 600; }
+.reveal .toc li { margin-bottom: 0.4em; }
