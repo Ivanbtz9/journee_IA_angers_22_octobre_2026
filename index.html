@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titre de la présentation</title>
+
+    <!-- Reveal.js (CDN) -->
+    <!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/theme/white.css" id="theme">
+    <!-- Coloration syntaxique -->
+    <!--link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/monokai.css"> -->
+
+    <!-- Reveal.js (local) -->
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/reveal.css">
+    <link rel="stylesheet" href="node_modules/reveal.js/dist/theme/white.css" id="theme">
+    <!-- Coloration syntaxique -->
+    <link rel="stylesheet" href="node_modules/reveal.js/plugin/highlight/monokai.css">
+
+    <style>
+    /* Quelques réglages sobres, à adapter */
+    :root {
+        --r-main-font: "Source Sans Pro", system-ui, sans-serif;
+        --r-heading-font: "Source Sans Pro", system-ui, sans-serif;
+        --r-heading-text-transform: none;   /* pas de MAJUSCULES automatiques */
+        --accent: #1f4e79;
+    }
+    .reveal h1, .reveal h2, .reveal h3 { color: var(--accent); font-weight: 600; }
+    .reveal section { text-align: left; }        /* titre centré via .center */
+    .reveal .center { text-align: center; }
+    .reveal .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; align-items: center; }
+    .reveal .small { font-size: 0.7em; }
+    .reveal .ref { color: #666; font-size: 0.55em; }
+    /* Démo interactive */
+    #demo-bar { height: 22px; background: var(--accent); width: 50%; border-radius: 3px; transition: width .15s; }
+    #demo-slider { width: 100%; }
+    </style>
+</head>
+
+<body>
+<div class="reveal">
+  <div class="slides">
+
+    <!-- 1. Titre -->
+    <section class="center">
+      <h1>Titre de la présentation</h1>
+      <p>Prénom Nom<br><span class="small">Laboratoire — Date</span></p>
+      <aside class="notes">Notes de l'orateur : visibles avec la touche S.</aside>
+    </section>
+
+    <!-- 2. Plan -->
+    <section>
+      <h2>Plan</h2>
+      <ol>
+        <li class="fragment">Contexte</li>
+        <li class="fragment">Méthode</li>
+        <li class="fragment">Résultats</li>
+      </ol>
+      <p class="small">Les éléments <code>.fragment</code> apparaissent un à un.</p>
+    </section>
+
+    <!-- 3. Slides verticales : une sous-pile pour un même thème -->
+    <section>
+      <section>
+        <h2>Méthode</h2>
+        <p>Flèche ↓ pour descendre dans la sous-pile, → pour passer au thème suivant.</p>
+      </section>
+      <section>
+        <h3>Équations</h3>
+        <p>En ligne : $\sigma(x) = \frac{1}{1 + e^{-x}}$</p>
+        <p>En bloc :</p>
+        \[
+          \mathcal{L}(\theta) = -\sum_{t=1}^{T} \log p_\theta(y_t \mid y_{<t}, x)
+        \]
+        <p class="ref">Rendu par KaTeX, syntaxe LaTeX inchangée.</p>
+      </section>
+      <section>
+        <h3>Deux colonnes</h3>
+        <div class="cols">
+          <div>
+            <ul>
+              <li>Texte à gauche</li>
+              <li>Figure à droite</li>
+            </ul>
+          </div>
+          <div>
+            <!-- Remplacer par <img src="figures/ma_figure.svg"> -->
+            <svg viewBox="0 0 200 120" width="100%">
+              <rect x="10" y="70" width="40" height="40" fill="#1f4e79"/>
+              <rect x="60" y="45" width="40" height="65" fill="#3d7ab8"/>
+              <rect x="110" y="20" width="40" height="90" fill="#7fb2e0"/>
+              <line x1="5" y1="110" x2="195" y2="110" stroke="#333"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+    </section>
+
+    <!-- 4. Code -->
+    <section>
+      <h2>Code</h2>
+      <pre><code class="language-python" data-trim data-line-numbers="1-2|4">
+import torch
+
+x = torch.randn(8, 512)
+y = torch.nn.functional.normalize(x, dim=-1)
+      </code></pre>
+      <p class="small">Les groupes de <code>data-line-numbers</code> se surlignent successivement.</p>
+    </section>
+
+    <!-- 5. Démo interactive : JS branché sur la slide -->
+    <section>
+      <h2>Démo interactive</h2>
+      <p>Ratio : <strong id="demo-value">0.50</strong></p>
+      <div id="demo-bar"></div>
+      <input id="demo-slider" type="range" min="0" max="100" value="50">
+      <p class="small">N'importe quel JS (D3, Chart.js, canvas, WebGL…) peut vivre dans une slide.</p>
+    </section>
+
+    <!-- 6. Conclusion -->
+    <section class="center">
+      <h2>Merci</h2>
+      <p class="small">Questions ?</p>
+    </section>
+
+  </div>
+</div>
+
+<!-- <script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/dist/reveal.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/math/math.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/highlight/highlight.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/notes/notes.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/reveal.js@5.1.0/plugin/zoom/zoom.js"></script> -->
+<script src="node_modules/reveal.js/dist/reveal.js"></script>
+<script src="node_modules/reveal.js/plugin/math/math.js"></script>
+<script src="node_modules/reveal.js/plugin/highlight/highlight.js"></script>
+<script src="node_modules/reveal.js/plugin/notes/notes.js"></script>
+<script src="node_modules/reveal.js/plugin/zoom/zoom.js"></script>
+<script>
+  Reveal.initialize({
+    hash: true,              // URL synchronisée avec la slide (deep-link, rechargement)
+    slideNumber: 'c/t',      // numéro de slide
+    transition: 'slide',
+    katex: {                 // options du plugin math (mode KaTeX)
+      local: 'node_modules/katex', //si en local
+      delimiters: [
+        { left: '$$',  right: '$$',  display: true  },
+        { left: '$',   right: '$',   display: false },
+        { left: '\\[', right: '\\]', display: true  },
+        { left: '\\(', right: '\\)', display: false }
+      ],
+      ignoredTags: ['script', 'noscript', 'style', 'textarea', 'pre']
+    },
+    plugins: [RevealMath.KaTeX, RevealHighlight, RevealNotes, RevealZoom]
+  });
+
+  // --- Démo interactive ---
+  const slider = document.getElementById('demo-slider');
+  const bar    = document.getElementById('demo-bar');
+  const value  = document.getElementById('demo-value');
+  slider.addEventListener('input', () => {
+    bar.style.width = slider.value + '%';
+    value.textContent = (slider.value / 100).toFixed(2);
+  });
+
+  // Exemple : déclencher une animation quand une slide donnée devient visible
+  Reveal.on('slidechanged', event => {
+    if (event.currentSlide.contains(slider)) slider.focus();
+  });
+</script>
+</body>
+</html>
