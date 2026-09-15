@@ -39,72 +39,223 @@
     <section>
       <h2>Au programme</h2>
       <ol>
-        <li class="fragment">IA : modélisation - apprentissage - prédiction</li>
-        <li class="fragment">Ressources de calcul et de stockage</li>
-        <li class="fragment">Cas particulier : les modèles de langues</li>
-        <li class="fragment">Lien avec mes travaux de thèse</li>
+        <li class="fragment">
+          <a href="#/ia-modelisation">IA : modélisation - apprentissage - prédiction</a>
+        </li>
+        <li class="fragment">
+          <a href="#/ressources-calcul">Ressources de calcul et de stockage</a>
+        </li>
+        <li class="fragment">
+          <a href="#/modeles-langues">Cas particulier : les modèles de langues</a>
+        </li>
+        <li class="fragment">
+          <a href="#/travaux-these">Lien avec mes travaux de thèse</a>
+        </li>
       </ol>
     </section>
 
-    <!-- 3. Slides verticales : une sous-pile pour un même thème -->
+    <!-- 3. Introduction -->
     <section>
-      <section>
-        <h2>Méthode</h2>
-        <p>Flèche ↓ pour descendre dans la sous-pile, → pour passer au thème suivant.</p>
-      </section>
-      <section>
-        <h3>Équations</h3>
-        <p>En ligne : $\sigma(x) = \frac{1}{1 + e^{-x}}$</p>
-        <p>En bloc :</p>
-        \[
-          \mathcal{L}(\theta) = -\sum_{t=1}^{T} \log p_\theta(y_t \mid y_{<t}, x)
-        \]
-        <p class="ref">Rendu par KaTeX, syntaxe LaTeX inchangée.</p>
-      </section>
-      <section>
-        <h3>Deux colonnes</h3>
-        <div class="cols">
-          <div>
-            <ul>
-              <li>Texte à gauche</li>
-              <li>Figure à droite</li>
-            </ul>
+
+    <section>
+    <h2>Séminaire de Dartmouth 1956</h2>
+    <p style="font-size: 0.9em">La naissance de la discipline : Intelligence Artificielle</p>
+    <div class="highlight-box">
+    <img src="assets/img/dartmouth_workshop_picture.webp"
+    alt="Les participants du séminaire de Dartmouth devant Dartmouth Hall, 1956"
+    style="display: block; margin: 0 auto; max-height: 330px; max-width: 100%; width: auto; height: auto; border-radius: 6px;">
+    <p style="font-size: 0.5em; line-height: 1.4; margin: 12px auto 0; max-width: 90%; color: #666;">
+                Au second rang, de gauche à droite : Oliver Selfridge, Nathaniel Rochester, Marvin Minsky, John McCarthy.
+                Au premier rang : Ray Solomonoff, Peter Milner, Claude Shannon.
+    <br><span style="font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.06em;">Photo : Nathaniel Rochester — The Minsky Family</span>
+    </p>
+    </div>
+    </section>
+
+    <section>
+    <div class="highlight-box">
+    <p style="font-size: 1.1em; font-style: italic; margin: 0;">
+                « Quels problèmes de niveau humain un algorithme serait-il capable de résoudre ? »
+    </p>
+    </div>
+    <ul class="custom-list" style="margin-top: 35px; font-size: 0.9em;">
+    <li class="fragment"><strong>Objectif :</strong> Simuler l'intelligence humaine.</li>
+    <li class="fragment"><strong>Vision :</strong> Reconnaissance d'images.</li>
+    <li class="fragment"><strong>Langage :</strong> Génération automatique de texte.</li>
+    <li class="fragment"><strong>Modèle :</strong> Réseaux de neurones artificiels.</li>
+    </ul>
+    </section>
+    </section>
+
+    <!-- Section 1 -->
+    <section id="ia-modelisation">
+      <h2>1. IA : modélisation - apprentissage - prédiction</h2>
+      <!-- <p>Contenu de votre première partie...</p> -->
+      <!-- Petit bouton de retour au sommaire si besoin -->
+      <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
+    </section>
+
+
+    <!-- ========================================== -->
+    <!-- SUB-SECTION 1.1 : MODÉLISATION (Verticale) -->
+    <!-- ========================================== -->
+    <section id="ia-modelisation">
+
+      <!-- A) Schéma + Tâche -->
+      <section id="schema-tache">
+        <h3>Schéma guidant les modèles d'IA</h3>
+
+        <div class="schema-container">
+
+          <div class="schema-box main-box">
+            <div class="box-tag">Problème</div>
+            <strong>Problème du monde réel</strong>
+            <span class="sub-text">Des données & une tâche</span>
           </div>
-          <div>
-            <!-- Remplacer par <img src="figures/ma_figure.svg"> -->
-            <svg viewBox="0 0 200 120" width="100%">
-              <rect x="10" y="70" width="40" height="40" fill="#1f4e79"/>
-              <rect x="60" y="45" width="40" height="65" fill="#3d7ab8"/>
-              <rect x="110" y="20" width="40" height="90" fill="#7fb2e0"/>
-              <line x1="5" y1="110" x2="195" y2="110" stroke="#333"/>
-            </svg>
+
+          <div class="schema-arrow">→</div>
+
+          <div class="schema-box math-box">
+            <div class="box-tag">Modélisation</div>
+            <strong>Modélisation mathématique</strong>
+            <span class="sub-text">Espace vectoriel $E = \mathbb{R}^d$</span>
+            <div class="param-badge">Modèle paramétrique $f_\theta,\; \theta \in \mathbb{R}^p$</div>
+          </div>
+
+          <div class="schema-arrow">↑</div>
+          <div class="schema-spacer"></div>
+          <div class="schema-arrow">↓</div>
+
+          <div class="schema-box real-box">
+            <div class="box-tag">Application</div>
+            <strong>Prédiction dans le monde réel</strong>
+          </div>
+
+          <div class="schema-arrow">←</div>
+
+          <div class="schema-box opt-box">
+            <div class="box-tag">Optimisation</div>
+            <strong>Minimisation d'une fonction de coût</strong>
+            <span class="sub-text">Résolution dans l'espace d'arrivée $F$</span>
+          </div>
+
+        </div>
+
+        <div class="tache-container fragment fade-up">
+          <div class="tache-header">Définition de la tâche</div>
+          <div class="tache-grid">
+
+            <div class="tache-card card-reg">
+              <div class="tache-title">Régression</div>
+              <p>Prédire un vecteur $f_\theta(x)$ dans un espace normé $(F, \|\cdot\|)$ </p>
+              <span class="math-detail">
+                $F = \mathbb{R}^d$, $\;f_\theta(x) \in \mathbb{R}^d$
+                <br>
+                Coût : $\|y - f_\theta(x)\|_2^2$
+              </span>
+            </div>
+
+            <div class="tache-card card-clf">
+              <div class="tache-title">Classification</div>
+              <p>Prédire une loi de probabilité $p_\theta(\cdot\,|\,x)$ sur l'espace des classes $(\mathcal{Y}, \mathcal{A})$ </p>
+              <span class="math-detail">
+                Binaire : $\mathcal{Y}=\{0,1\}$, $\;p_\theta(\cdot\,|\,x) = \sigma(f_\theta(x)) \in \Delta(\mathcal{Y})$
+                <br>
+                Coût : $KL\big(\delta_y \,\|\, p_\theta(\cdot\,|\,x)\big) = -\log p_\theta(y\,|\,x)$
+              </span>
+            </div>
           </div>
         </div>
       </section>
+
+      <!-- B) Transport vers l'espace latent -->
+      <section data-auto-animate id="transport-1">
+        <h3 data-id="titre">Ce que fait un modèle de classification</h3>
+        <img data-id="fig" src="assets/img/01_espace_initial.png"
+            alt="Nuage de points bleus et rouges imbriqués dans l'espace initial"
+            style="max-height: 430px; width: auto; display: block; margin: 0 auto;">
+        <p class="legende-fig">Les deux classes sont imbriquées : aucune frontière linéaire ne convient.</p>
+      </section>
+
+      <section data-auto-animate id="transport-2">
+        <h3 data-id="titre">Ce que fait un modèle de classification</h3>
+        <img data-id="fig" src="assets/img/02_espace_latent.png"
+            alt="Les deux classes séparées par un hyperplan dans l'espace latent"
+            style="max-height: 430px; width: auto; display: block; margin: 0 auto;">
+        <p class="legende-fig">$f_\theta$ transporte les données vers un espace où un seul hyperplan sépare.</p>
+      </section>
+
+      <section data-auto-animate id="transport-3">
+        <h3 data-id="titre">Ce que fait un modèle de classification</h3>
+        <img data-id="fig" src="assets/img/03_sigmoide.png"
+            alt="Courbe sigmoïde transformant les logits en probabilités"
+            style="max-height: 400px; width: auto; display: block; margin: 0 auto;">
+        <p class="legende-fig">$\sigma$ est une fonction d'activation pour obtenir une mesure de probabilité $p_\theta(\cdot\,|\,x) \in \Delta(\mathcal{Y})$.</p>
+      </section>
+
+      <!-- C) Visualisation réseaux de neurones / Algèbre linéaire -->
+      <section id="modelisation-reseaux-algebre-lineaire">
+        <h3>De l'algèbre linéaire aux réseaux de neurones</h3>
+
+        <div class="split-2">
+
+          <div class="split-col split-left">
+            <img src="assets/img/reseau-de-neurones-artificiels.webp"
+                alt="Schéma d'un réseau de neurones artificiels : couches d'entrée, cachées et de sortie"
+                class="split-img">
+            <p class="split-credit">Source : astronoo.com</p>
+          </div>
+
+          <div class="split-col split-right">
+            <div class="fragment fade-right">
+              <p class="split-intro">Interprétation matricielle d'une couche :</p>
+              <img src="assets/img/couche_matrices.png"
+                  alt="Produit matriciel W·x + b suivi d'une activation"
+                  class="split-img">
+            </div>
+
+            <ul class="split-list">
+              <li class="fragment fade-right">Transformations affines : $W \cdot x + b$</li>
+              <li class="fragment fade-right">Fonctions d'activation non linéaires</li>
+              <li class="fragment fade-right">Changements de repère et projection géométrique</li>
+            </ul>
+          </div>
+
+        </div>
+      </section>
+
+
+    
+
     </section>
 
-    <!-- 4. Code -->
-    <section>
-      <h2>Code</h2>
-      <pre><code class="language-python" data-trim data-line-numbers="1-2|4">
-import torch
 
-x = torch.randn(8, 512)
-y = torch.nn.functional.normalize(x, dim=-1)
-      </code></pre>
-      <p class="small">Les groupes de <code>data-line-numbers</code> se surlignent successivement.</p>
+   
+
+  </section>
+    <!-- Section 2 -->
+    <section id="ressources-calcul">
+      <h2>2. Ressources de calcul et de stockage</h2>
+      <!-- <p>Contenu de votre deuxième partie (HPC, GPU, clusters...)...</p> -->
+      <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
     </section>
 
-    <!-- 5. Démo interactive : JS branché sur la slide -->
-    <section>
-      <h2>Démo interactive</h2>
-      <p>Ratio : <strong id="demo-value">0.50</strong></p>
-      <div id="demo-bar"></div>
-      <input id="demo-slider" type="range" min="0" max="100" value="50">
-      <p class="small">N'importe quel JS (D3, Chart.js, canvas, WebGL…) peut vivre dans une slide.</p>
+    <!-- Section 3 -->
+    <section id="modeles-langues">
+      <h2>3. Cas particulier : les modèles de langues</h2>
+      <!-- <p>Contenu sur les LLM, architecture Transformer, etc...</p> -->
+      <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
     </section>
 
-    <!-- 6. Conclusion -->
+    <!-- Section 4 -->
+    <section id="travaux-these">
+      <h2>4. Lien avec mes travaux de thèse</h2>
+      <!-- <p>Présentation de vos recherches et contributions...</p> -->
+      <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
+    </section>
+
+
+    <!-- Conclusion -->
     <section class="center">
       <h2>Merci</h2>
       <p class="small">Questions ?</p>

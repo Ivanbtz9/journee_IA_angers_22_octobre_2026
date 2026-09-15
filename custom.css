@@ -12,9 +12,220 @@
 .reveal .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; align-items: center; }
 .reveal .small { font-size: 0.7em; }
 .reveal .ref { color: #666; font-size: 0.55em; }
+
+.reveal .toc li::marker { color: var(--accent); font-weight: 600; }
+.reveal .toc li { margin-bottom: 0.4em; }
+
+/* Style personnalisé pour les liens du sommaire */
+.reveal ol li a {
+  color: inherit; /* Conserve la couleur de texte par défaut de la slide */
+  text-decoration: none;
+  transition: color 0.2s ease, border-bottom 0.2s ease;
+}
+
+/* Effet lors du survol de la souris */
+.reveal ol li a:hover {
+  color: #bd93f9; /* Couleur d'accentuation (ex: violet/rose) */
+  text-decoration: underline;
+}
+
 /* Démo interactive */
 #demo-bar { height: 22px; background: var(--accent); width: 50%; border-radius: 3px; transition: width .15s; }
 #demo-slider { width: 100%; }
 
-.reveal .toc li::marker { color: var(--accent); font-weight: 600; }
-.reveal .toc li { margin-bottom: 0.4em; }
+
+/* ===== Schéma global & tâches d'IA ===== */
+#schema-tache h3 { font-size: 30px; margin: 0 0 20px; }
+
+/* Empêche KaTeX de grossir les formules (1.21em par défaut) */
+#schema-tache .katex { font-size: 1em; }
+
+.schema-container {
+  display: grid;
+  grid-template-columns: 1fr 54px 1fr;
+  grid-template-rows: auto 30px auto;
+  max-width: 850px;
+  margin: 0 auto;
+  align-items: center;
+}
+
+.schema-box {
+  position: relative;
+  background: #fff;
+  border: 1px solid #DCDCD6;
+  border-top: 3px solid var(--stage);
+  border-radius: 4px;
+  padding: 18px 16px 14px;
+  text-align: center;
+  box-shadow: 0 1px 3px rgba(20, 20, 26, .08);
+}
+.schema-box strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: 1.25;
+  color: #14141A;            /* corrige le texte blanc sur blanc */
+}
+.schema-box .sub-text {
+  display: block;
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: #5A5A63;
+}
+
+.box-tag {
+  position: absolute;
+  top: -10px; left: 14px;
+  background: var(--stage);
+  color: #fff;
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 9px;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  padding: 2px 8px;
+  border-radius: 2px;
+}
+
+.main-box { --stage: #647187; }
+.math-box { --stage: #1F6FB2; }
+.opt-box  { --stage: #C0392B; }
+.real-box { --stage: #2E7D55; }
+
+.param-badge {
+  margin-top: 10px;
+  background: #F1F6F2;
+  border: 1px solid #CBE0D2;
+  border-radius: 3px;
+  padding: 7px 10px;
+  font-size: 13px;
+  color: #2E6B4B;
+}
+
+.schema-arrow {
+  font-size: 22px;
+  line-height: 1;
+  color: #A9A9A2;
+  text-align: center;
+}
+
+/* ===== Bloc « tâche » ===== */
+.tache-container { max-width: 850px; margin: 24px auto 0; }
+
+.tache-header {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #5A5A63;
+  text-align: left;
+  border-top: 1px solid #DCDCD6;
+  padding-top: 8px;
+  margin-bottom: 12px;
+}
+
+.tache-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+
+.tache-card {
+  background: #fff;
+  border: 1px solid #DCDCD6;
+  border-left: 3px solid var(--stage);
+  border-radius: 4px;
+  padding: 12px 14px;
+  text-align: left;
+}
+.card-reg { --stage: #1F6FB2; }
+.card-clf { --stage: #C0392B; }
+
+.tache-title { font-size: 15px; font-weight: 600; color: var(--stage); margin-bottom: 5px; }
+.tache-card p { font-size: 13px; line-height: 1.35; margin: 0 0 6px; color: #14141A; }
+.math-detail { font-size: 12px; color: #5A5A63; }
+
+.legende-fig {
+  font-size: 22px;
+  line-height: 1.5;
+  color: #3C3C44;
+  max-width: 760px;
+  margin: 20px auto 0;
+}
+.legende-fig .katex { font-size: 1.05em; color: #14141A; }
+
+/* ===== Mise en page bicolonne ===== */
+#modelisation-reseaux-algebre-lineaire h3 {
+  font-size: 34px;
+  line-height: 1.15;
+  margin: 0 0 6px;
+}
+
+.split-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 28px;
+  align-items: start;
+  max-width: 940px;
+  margin: 14px auto 0;
+  text-align: left;
+}
+
+.split-col { display: flex; flex-direction: column; }
+
+/* Colonne gauche : le schéma occupe toute la hauteur disponible */
+.split-left { justify-content: center; }
+
+.split-img {
+  display: block;
+  width: 100%;
+  max-height: 300px;
+  object-fit: contain;
+  margin: 0 auto;
+  border-radius: 4px;
+}
+.split-left  .split-img { max-height: 380px; }
+.split-right .split-img { max-height: 190px; margin: 0 0 16px; }
+
+.split-credit {
+  font-family: "IBM Plex Mono", monospace;
+  font-size: 11px;
+  letter-spacing: .06em;
+  color: #5A5A63;
+  margin: 8px 0 0;
+  text-align: center;
+}
+
+.split-intro {
+  font-size: 20px;
+  color: #3C3C44;
+  margin: 0 0 12px;
+}
+
+/* Liste : marqueur natif neutralisé, tiret redessiné en ::before */
+.reveal .split-list {
+  list-style: none;
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  font-size: 19px;
+  line-height: 1.45;
+}
+.reveal .split-list li {
+  list-style: none;
+  list-style-type: none;
+  position: relative;
+  padding-left: 20px;
+  margin-bottom: 12px;
+}
+.reveal .split-list li::marker { content: none; }
+.reveal .split-list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: .55em;
+  width: 8px;
+  height: 2px;
+  background: #1F6FB2;
+}
+.split-list .katex { font-size: 1.05em; color: #14141A; }
+
+/* Amplitude du glissement latéral */
+.reveal .fragment.fade-right { transform: translateX(-40px); }
+.reveal .fragment.fade-right.visible { transform: translateX(0); }

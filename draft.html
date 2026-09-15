@@ -1,0 +1,58 @@
+ 
+      <!-- C) Théorème d'approximation -->
+      <section id="modelisation-theoreme-approximation">
+        <h3>Théorème d'Approximation Universelle</h3>
+        <div class="highlight-box">
+          <p>Capacité des réseaux de neurones à approximer n'importe quelle fonction continue sous certaines conditions.</p>
+        </div>
+      </section>
+
+
+ <!-- ========================================== -->
+    <!-- SUB-SECTION 1.2 : APPRENTISSAGE (Verticale) -->
+    <!-- ========================================== -->
+    <section id="ia-apprentissage">
+
+      <!-- Slide de titre de sous-partie -->
+      <section>
+        <h2>1.2 Apprentissage</h2>
+        <p style="color: #bd93f9; font-size: 0.85em;">Optimisation et entraînement des paramètres</p>
+        <p style="font-size: 0.6em; opacity: 0.6; margin-top: 40px;">↓ Défiler vers le bas pour continuer ↓</p>
+      </section>
+
+      <!-- A) Poids initialisés aléatoirement selon Gaussienne et fonction de coût -->
+      <section id="apprentissage-initialisation-cout">
+        <h3>Initialisation & Fonction de Coût</h3>
+        <ul>
+          <li class="fragment">
+            <strong>Initialisation des poids :</strong> Tirage aléatoire selon une loi gaussienne $\mathcal{N}(\mu, \sigma^2)$.
+          </li>
+          <li class="fragment">
+            <strong>Fonction de coût (Loss) :</strong> Mesure de l'erreur entre prédiction et vérité terrain.
+          </li>
+        </ul>
+      </section>
+
+      <!-- B) Algorithme de descente de gradient -->
+      <section id="apprentissage-descente-gradient">
+        <h3>Algorithme de Descente de Gradient</h3>
+        <p>Mise à jour itérative des paramètres pour minimiser la fonction de coût :</p>
+        <div class="highlight-box" style="text-align: center;">
+          $$\theta_{t+1} = \theta_t - \eta \cdot \nabla_\theta \mathcal{L}(\theta_t)$$
+        </div>
+        <ul>
+          <li class="fragment">Calcul du gradient via rétropropagation</li>
+          <li class="fragment">Taux d'apprentissage ($\eta$)</li>
+        </ul>
+      </section>
+
+      <!-- C) Malédiction de la dimension -->
+      <section id="apprentissage-malediction-dimension">
+        <h3>La Malédiction de la Dimension</h3>
+        <p>Impact de la dimensionnalité de l'espace sur l'apprentissage :</p>
+        <ul>
+          <li class="fragment">Explosion du volume de l'espace de recherche à mesure que la dimension augmente.</li>
+          <li class="fragment">Rareté des données (data sparsity).</li>
+          <li class="fragment">Nécessité de régularisation et réduction de dimension.</li>
+        </ul>
+      </section>
