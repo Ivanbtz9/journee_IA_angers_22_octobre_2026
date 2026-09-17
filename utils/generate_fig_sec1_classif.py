@@ -88,14 +88,22 @@ ax = fig.add_subplot(111, projection="3d")
 
 # On dessine le rouge d'abord (externe) puis le bleu, pour que le noyau
 # reste visible au travers de la coquille.
-ax.scatter(*X_rouge.T, c=ROUGE, s=26, alpha=.30, edgecolors="none", depthshade=False)
-ax.scatter(*X_bleu.T,  c=BLEU,  s=30, alpha=.95, edgecolors="none", depthshade=False)
+ax.scatter(*X_rouge.T, c=ROUGE, s=30, alpha=.55,
+           edgecolors="#7A2318", linewidths=.4,
+           depthshade=False, label="label 1")
+ax.scatter(*X_bleu.T,  c=BLEU,  s=30, alpha=.95, edgecolors="none",
+           depthshade=False, label="label 0")
 
 repere(ax)
 nettoyer_3d(ax)
 ax.view_init(elev=16, azim=-58)
 ax.set_title("Espace des données $\\mathcal{X}$\naucun plan ne sépare les deux classes",
              fontsize=12, color=ENCRE, y=.90, linespacing=1.5)
+leg = fig.legend(*[x[::-1] for x in ax.get_legend_handles_labels()],  # label 0 en premier
+                 loc="lower center", ncol=2, frameon=False,
+                 bbox_to_anchor=(.5, .04), fontsize=11, handletextpad=.3)
+for h in leg.legend_handles:      # (leg.legendHandles si matplotlib < 3.7)
+    h.set_alpha(1)
 fig.subplots_adjust(left=-.10, right=1.10, bottom=-.14, top=1.02)
 fig.savefig("../assets/img/01_espace_initial.png", dpi=DPI)
 plt.close(fig)
@@ -118,8 +126,8 @@ Z_rouge = vers_latent(X_rouge, 1)
 fig = plt.figure(figsize=(5.6, 5.2))
 ax = fig.add_subplot(111, projection="3d")
 
-ax.scatter(*Z_bleu.T,  c=BLEU,  s=28, alpha=.85, edgecolors="none", depthshade=False)
-ax.scatter(*Z_rouge.T, c=ROUGE, s=28, alpha=.85, edgecolors="none", depthshade=False)
+ax.scatter(*Z_bleu.T,  c=BLEU,  s=28, alpha=.85, edgecolors="none", depthshade=False, label="label 0")
+ax.scatter(*Z_rouge.T, c=ROUGE, s=28, alpha=.85, edgecolors="none", depthshade=False, label="label 1")
 
 # Hyperplan separateur u = 0
 yy, zz = np.meshgrid(np.linspace(-2.4, 2.4, 2), np.linspace(-2.4, 2.4, 2))
@@ -135,6 +143,10 @@ nettoyer_3d(ax)
 ax.view_init(elev=16, azim=-58)
 ax.set_title("Espace latent $f_\\theta(\\mathcal{X})$\nun hyperplan sépare les données ",
              fontsize=12, color=ENCRE, y=.90, linespacing=1.5)
+leg = fig.legend(loc="lower center", ncol=2, frameon=False,
+                 bbox_to_anchor=(.5, .04), fontsize=11, handletextpad=.3)
+for h in leg.legend_handles:
+    h.set_alpha(1)
 fig.subplots_adjust(left=-.10, right=1.10, bottom=-.14, top=1.02)
 fig.savefig("../assets/img/02_espace_latent.png", dpi=DPI)
 plt.close(fig)
@@ -156,10 +168,10 @@ ax.axhline(.5, color=FILET, lw=1, ls=(0, (4, 4)), zorder=1)
 ax.axvline(0, color=FILET, lw=1, ls=(0, (4, 4)), zorder=1)
 
 # Tapis des logits en bas, projection des probabilites a droite
-for vals, coul in [(logit_bleu, BLEU), (logit_rouge, ROUGE)]:
+for vals, coul, lab in [(logit_bleu, BLEU, "label 0"), (logit_rouge, ROUGE, "label 1")]:
     v = np.clip(vals, -8.6, 8.6)
     ax.scatter(v, np.full_like(v, -.055), c=coul, s=15, alpha=.40,
-               edgecolors="none", clip_on=False, zorder=4)
+               edgecolors="none", clip_on=False, zorder=4, label=lab)
     p = 1 / (1 + np.exp(-v))
     axp.scatter(rng.uniform(.12, .88, len(p)), p, c=coul, s=15, alpha=.40,
                 edgecolors="none", zorder=4)
@@ -173,6 +185,9 @@ ax.set_xlim(-9, 9)
 ax.set_ylim(-.09, 1.09)
 ax.set_yticks([0, .5, 1])
 ax.set_title("Des logits aux probabilités", fontsize=12, color=ENCRE, pad=12)
+leg = ax.legend(loc="upper left", frameon=False, fontsize=10, handletextpad=.3)
+for h in leg.legend_handles:
+    h.set_alpha(1)
 
 axp.set_xlim(0, 1)
 axp.set_xticks([])

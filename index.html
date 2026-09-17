@@ -46,10 +46,7 @@
           <a href="#/ressources-calcul">Ressources de calcul et de stockage</a>
         </li>
         <li class="fragment">
-          <a href="#/modeles-langues">Cas particulier : les modèles de langues</a>
-        </li>
-        <li class="fragment">
-          <a href="#/travaux-these">Lien avec mes travaux de thèse</a>
+          <a href="#/modeles-langues">Les modèles de langues et démos</a>
         </li>
       </ol>
     </section>
@@ -87,7 +84,7 @@
     </section>
     </section>
 
-    <!-- Section 1 -->
+    <!-- Section 1 = 1. IA : modélisation - apprentissage - prédiction--> 
     <section id="ia-modelisation">
       <h2>1. IA : modélisation - apprentissage - prédiction</h2>
       <!-- <p>Contenu de votre première partie...</p> -->
@@ -102,8 +99,8 @@
     <section id="ia-modelisation">
 
       <!-- A) Schéma + Tâche -->
-      <section id="schema-tache">
-        <h3>Schéma guidant les modèles d'IA</h3>
+      <section data-auto-animate id="schema-tache">
+        <h3 data-id="titre" style="font-size: 1.3em">Schéma pour les modèles d'IA</h3>
 
         <div class="schema-container">
 
@@ -174,7 +171,7 @@
         <img data-id="fig" src="assets/img/01_espace_initial.png"
             alt="Nuage de points bleus et rouges imbriqués dans l'espace initial"
             style="max-height: 430px; width: auto; display: block; margin: 0 auto;">
-        <p class="legende-fig">Les deux classes sont imbriquées : aucune frontière linéaire ne convient.</p>
+        <p>Les deux classes sont imbriquées, aucune frontière linéaire.</p>
       </section>
 
       <section data-auto-animate id="transport-2">
@@ -182,7 +179,7 @@
         <img data-id="fig" src="assets/img/02_espace_latent.png"
             alt="Les deux classes séparées par un hyperplan dans l'espace latent"
             style="max-height: 430px; width: auto; display: block; margin: 0 auto;">
-        <p class="legende-fig">$f_\theta$ transporte les données vers un espace où un seul hyperplan sépare.</p>
+        <p>$f_\theta$ transporte les données vers un nouvel espace de représentations.</p>
       </section>
 
       <section data-auto-animate id="transport-3">
@@ -190,20 +187,20 @@
         <img data-id="fig" src="assets/img/03_sigmoide.png"
             alt="Courbe sigmoïde transformant les logits en probabilités"
             style="max-height: 400px; width: auto; display: block; margin: 0 auto;">
-        <p class="legende-fig">$\sigma$ est une fonction d'activation pour obtenir une mesure de probabilité $p_\theta(\cdot\,|\,x) \in \Delta(\mathcal{Y})$.</p>
+        <p>$\sigma$ est une fonction d'activation pour obtenir une mesure de probabilité $p_\theta(\cdot\,|\,x) \in \Delta(\mathcal{Y})$.</p>
       </section>
 
       <!-- C) Visualisation réseaux de neurones / Algèbre linéaire -->
-      <section id="modelisation-reseaux-algebre-lineaire">
-        <h3>De l'algèbre linéaire aux réseaux de neurones</h3>
+      <section data-auto-animate id="modelisation-reseaux-algebre-lineaire">
+        <h3 data-id="titre" style="font-size: 1.3em">Algèbre linéaire & réseaux de neurones</h3>
 
         <div class="split-2">
 
           <div class="split-col split-left">
-            <img src="assets/img/reseau-de-neurones-artificiels.webp"
+            <img src="assets/img/04_neurone_affine.png"
                 alt="Schéma d'un réseau de neurones artificiels : couches d'entrée, cachées et de sortie"
                 class="split-img">
-            <p class="split-credit">Source : astronoo.com</p>
+            <p class="split-credit">Schéma d'un réseau de neurones artificiels à une couche</p>
           </div>
 
           <div class="split-col split-right">
@@ -217,22 +214,159 @@
             <ul class="split-list">
               <li class="fragment fade-right">Transformations affines : $W \cdot x + b$</li>
               <li class="fragment fade-right">Fonctions d'activation non linéaires</li>
-              <li class="fragment fade-right">Changements de repère et projection géométrique</li>
+              <li class="fragment fade-right">Changements de repère et transformation de la géométrie</li>
             </ul>
           </div>
 
         </div>
       </section>
 
+      <!-- D) Théorème d'approximation universelle -->
+      <section data-auto-animate id="approximation-universelle">
+        <h3 data-id="titre" style="font-size: 1.3em">Théorème d'approximation universelle</h3>
 
-    
+        <div style="font-size: 0.45em; text-align: left; border-left: 4px solid #1F6FB2;
+                    padding: 0 0 0 0.8em;">
+          <p style="margin: 0;"><strong>Théorème</strong> (Pinkus, 1999).
+            Soit \(\sigma \in \mathcal{C}(\mathbb{R}, \mathbb{R})\), appliquée coordonnée par coordonnée.
+            \(\sigma\) n'est pas polynomiale si et seulement si :</p>
+          \[
+            \begin{aligned}
+              &\forall K \subset \mathbb{R}^n \text{ compact},\ \forall f \in \mathcal{C}(K, \mathbb{R}^m),\
+              \forall \varepsilon > 0,\ \exists\, k \in \mathbb{N},\\
+              &A \in \mathbb{R}^{k \times n},\ b \in \mathbb{R}^{k},\ C \in \mathbb{R}^{m \times k}
+              \ \text{ tels que } \
+              \sup_{x \in K} \big\| f(x) - C\,\sigma(Ax + b) \big\| < \varepsilon .
+            \end{aligned}
+          \]
+        </div>
 
+        <p style="font-size: 0.45em; text-align: left; margin: 0.4em 0 0;">
+          <strong>Exemple</strong> : \(n = m = 1\), \(K = [0, 1]\), \(\sigma\) sigmoïde.
+        </p>
+
+        <img class="r-stretch"  src="assets/img/05_approximation_universelle.png?v=2" style="margin: 0.2em 0;"
+            alt="Un neurone est une marche ; une somme de k neurones approche f sur [0,1]">
+
+        <p style="font-size: 0.3em; color: #5A5A63; margin: 0.4em 0 0;">
+          Cybenko (1989) · Hornik (1989) · Pinkus (1999)
+        </p>
+        <p style="font-size: 0.45em; margin: 0;">
+          Résultat d'<em>existence</em> : rien sur la taille \(k\), sur l'apprentissage des poids,
+          ni sur la généralisation.
+        </p>
+
+        <aside class="notes">
+          Exemple : chaque neurone est une marche ; en ajoutant des marches, g approche f.
+          Une seule couche cachée suffit : les x ↦ σ(aᵀx + b) engendrent un sous-espace dense de C(K).
+          Cybenko : σ sigmoïdale ; Hornik et al. : σ « squashing » ; Pinkus : toute σ continue
+          non polynomiale, ReLU comprise.
+        </aside>
+      </section>
+  </section>
+
+  <!-- ========================================== -->
+  <!-- SUB-SECTION 1.2 : OPTIMISATION (Verticale) -->
+  <!-- ========================================== -->
+  <section>
+
+    <!-- A) Initialisation et fonction de coût -->
+    <section data-auto-animate id="optimisation-cout">
+    <!-- Resserre les marges des équations display sur cette slide uniquement -->
+    <style>
+      #optimisation-cout .katex-display,
+      #optimisation-cout mjx-container[display="true"],
+      #optimisation-cout .MathJax_Display { margin: 0.3em 0 !important; }
+    </style>
+
+    <h3 data-id="titre" style="font-size: 1.3em">Apprentissage : minimiser un coût</h3>
+
+    <div style="font-size: 0.6em; text-align: left; margin-top: 0.5em;">
+
+    <p><strong>Initialisation</strong> : poids tirés au hasard, ni trop grands
+          (<em>explosion</em> du gradient) ni trop petits (<em>vanishing</em> du gradient).</p>
+
+    <!-- Bicolonne : méthodes d'initialisation -->
+    <div style="display: flex; gap: 1.5em; margin: 0.3em 0 0.5em;">
+    <div style="flex: 1; border-left: 3px solid #888; padding-left: 0.8em;">
+    <p style="margin: 0 0 0.3em;"><strong>Xavier (Glorot)</strong> — tanh, sigmoïde</p>
+            \[
+              W \sim \mathcal{U}\big([-x,\, x]\big), \quad
+              x = \sqrt{\frac{6}{n_{\text{in}} + n_{\text{out}}}}
+            \]
+    </div>
+    <div style="flex: 1; border-left: 3px solid #888; padding-left: 0.8em;">
+    <p style="margin: 0 0 0.3em;"><strong>Kaiming (He)</strong> — ReLU</p>
+            \[
+              W \sim \mathcal{N}\!\left(0,\, \frac{2}{n_{\text{in}}}\right)
+            \]
+    </div>
+    </div>
+    <p style="font-size: 0.75em; margin-top: -0.3em;">
+          \(n_{\text{in}}, n_{\text{out}}\) : nombre de neurones en entrée / en sortie de la couche
+    </p>
+
+    <p class="fragment"><strong>Coût sur un batch aléatoire d'exemples </strong> \(B\) :
+                  \[
+                    \mathcal{L}_B(\theta) = \frac{1}{|B|} \sum_{i \in B} \ell\big(f_\theta(x_i),\, y_i\big)
+                  \]
+    </p>
+
+    <p class="fragment"><strong>Objectif</strong> :
+                  \(\theta^\star \in \arg\min_\theta \mathcal{L}(\theta)\)</p>
+    </div>
+
+    <aside class="notes">
+                Xavier : pensé pour des activations symétriques (tanh), équilibre fan-in et fan-out.
+                Kaiming : le facteur 2 compense la ReLU qui annule la moitié des activations.
+                Dans Kaiming, 2/n_in est la variance (écart-type = racine de 2/n_in).
+    </aside>
+  </section>
+
+    <!-- B) Descente de gradient -->
+    <section data-auto-animate id="descente-gradient">
+      <h3 data-id="titre" style="font-size: 1.3em">Descente de gradient stochastique</h3>
+
+      <div style="font-size: 0.5em;">
+        \[
+          \theta_{t+1} = \theta_t - \eta\, \nabla_\theta \mathcal{L}_{B_t}(\theta_t)
+        \]
+        <span class="fragment" data-video="video-sgd"></span>
+      </div>
+
+      <video id="video-sgd" class="r-stretch" muted playsinline preload="auto"
+            data-rate="0.6"
+            src="assets/videos/descente_gradient.mp4"
+            poster="assets/img/descente_gradient_poster.png"
+            style="margin: 0.2em 0 0;"></video>
+
+      <aside class="notes">
+        → pour lancer la vidéo, ← pour revenir au poster.
+        On part de θ₀, puis à chaque pas on tire un batch B_t et on fait un pas dans la
+        direction opposée au gradient. η : pas d'apprentissage. Le gradient est calculé
+        par rétropropagation.
+        Paysage jouet à 2 paramètres, avec de nombreux minima locaux. Le bruit du mini-batch
+        permet à la trajectoire rouge de sortir des petits puits et d'atteindre le plus
+        profond, où elle oscille pendant que le bruit diminue.
+      </aside>
     </section>
 
-
-   
+    <!-- C) La malédiction de la dimension -->
+    <section id="cruse_of_dimension">
+      <h3 data-id="titre" style="font-size: 1.3em">La malédiction de la dimension</h3>
+      Les modèles de réseaux de neurones vont de quelques millions à des centaines de milliards de paramètre aujourd'hui.
+      - pour des images, modélisé par des vecteurs de taille 1024*1024 on est dans un espace de grande dimension, les distance n'ont plus de sens ?  
+      - Un recouvrement de l'espace pour avoir un bon échantillonnage de la fonction objectif demande un volume d'exemple (x,y) non gigantesque
+      - deux vecteurs centré tiré de manière aléatoire sont presque tjs orthogonaux donc les poids de chaque neuronne induisent des directions indépendantes (resultat du à la loi des grand nombre)
+      - le ratio entre le volume de la boule unité pour la distance euclidienne est écrasée par le volume de l'hypercude = 2^d, les poids sont tous isolés  
+      generer une modélisation de la boule de dim 2, 3 et 4 dans lhypercube en animation pour d=4 avec vision temporelle ? un avis 
+    </section>
 
   </section>
+
+
+
+
     <!-- Section 2 -->
     <section id="ressources-calcul">
       <h2>2. Ressources de calcul et de stockage</h2>
@@ -244,13 +378,6 @@
     <section id="modeles-langues">
       <h2>3. Cas particulier : les modèles de langues</h2>
       <!-- <p>Contenu sur les LLM, architecture Transformer, etc...</p> -->
-      <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
-    </section>
-
-    <!-- Section 4 -->
-    <section id="travaux-these">
-      <h2>4. Lien avec mes travaux de thèse</h2>
-      <!-- <p>Présentation de vos recherches et contributions...</p> -->
       <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
     </section>
 
@@ -291,6 +418,31 @@
     },
     plugins: [RevealMath.KaTeX, RevealHighlight, RevealNotes, RevealZoom]
   });
+
+  // --- Vidéos pilotées par fragment ---
+  // Fragment portant data-video="id" : lance / remet a zero la video correspondante
+  const videoDuFragment = f => f.dataset.video && document.getElementById(f.dataset.video);
+
+  Reveal.on('fragmentshown', e => {
+    const v = videoDuFragment(e.fragment);
+    if (!v) return;
+    v.defaultPlaybackRate = v.playbackRate = parseFloat(v.dataset.rate || 1);
+    v.play();
+  });
+
+  Reveal.on('fragmenthidden', e => {
+    const v = videoDuFragment(e.fragment);
+    if (!v) return;
+    v.pause();
+    v.load();   // revient au debut et reaffiche le poster
+  });
+
+  // En quittant la slide, on remet la video a zero pour la prochaine fois
+  Reveal.on('slidechanged', e => {
+    if (!e.previousSlide) return;
+    e.previousSlide.querySelectorAll('video[data-rate]').forEach(v => { v.pause(); v.load(); });
+  });
+  
 
   // --- Démo interactive ---
   const slider = document.getElementById('demo-slider');
