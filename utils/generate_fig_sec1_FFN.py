@@ -2,7 +2,7 @@
 Deux figures pour la section « Reseau de neurones & algebre lineaire ».
 
   04 : action d'une couche sur l'espace, en quatre temps
-       x  ->  Wx  ->  Wx+b  ->  tanh(Wx+b)
+       x  ->  Wx  ->  Wx+b  ->  softmax(Wx+b)
   05 : la meme couche vue comme un produit matriciel
 """
 import numpy as np
@@ -81,7 +81,7 @@ xW = matrice(xv, r"$x$", f"${d_in} \\times 1$")
 symbole("+")
 matrice(bv, r"$b$", f"${d_out} \\times 1$")
 symbole("=")
-xA = matrice(av, r"$\tanh(Wx+b)$", f"${d_out} \\times 1$")
+xA = matrice(av, r"$Softmax(Wx+b)$", f"${d_out} \\times 1$")
 
 # Mise en evidence : ligne 2 de W x colonne de x -> coordonnee 2 de la sortie
 ax.add_patch(Rectangle((0, d_out / 2 - 2), d_in, 1, fill=False,
@@ -98,7 +98,7 @@ ax.text(CUR["x"] / 2, -d_in / 2 - 1.35,
         ha="center", fontsize=13, color=GRIS)
 
 fig.tight_layout()
-fig.savefig("../assets/img/05_couche_matrices.png", dpi=DPI, bbox_inches="tight")
+fig.savefig("../assets/img/04_couche_matrices.png", dpi=DPI, bbox_inches="tight")
 plt.close(fig)
 
 print("OK")

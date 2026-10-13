@@ -1,5 +1,5 @@
 """
-Un neurone = une ligne de W : h_i = tanh(w_i . x + b_i).
+Un neurone = une ligne de W : h_i = Softmax(w_i . x + b_i).
 Reseau 6 -> 4 coherent avec la heatmap W (4 x 6) de la slide.
 Sortie : PNG a fond transparent, pense pour un fond de slide clair.
 """

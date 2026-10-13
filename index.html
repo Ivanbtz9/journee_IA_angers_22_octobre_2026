@@ -26,7 +26,7 @@
 <div class="reveal">
   <div class="slides">
 
-    <!-- 1. Titre -->
+    <!-- Titre -->
     <section class="center">
       <h1>Centre de calculs et modèles d'IA</h1>
       <p>Ivanhoé Botcazou<br><span class="small">Doctorant en intelligence artificielle au LERIA </span></p>
@@ -35,7 +35,7 @@
     </section>
 
     
-    <!-- 2. Au programme -->
+    <!-- Au programme -->
     <section>
       <h2>Au programme</h2>
       <ol>
@@ -51,7 +51,7 @@
       </ol>
     </section>
 
-    <!-- 3. Introduction -->
+    <!-- Introduction -->
     <section>
 
     <section>
@@ -79,7 +79,7 @@
     <li class="fragment"><strong>Objectif :</strong> Simuler l'intelligence humaine.</li>
     <li class="fragment"><strong>Vision :</strong> Reconnaissance d'images.</li>
     <li class="fragment"><strong>Langage :</strong> Génération automatique de texte.</li>
-    <li class="fragment"><strong>Modèle :</strong> Réseaux de neurones artificiels.</li>
+    <li class="fragment"><strong>Modèles :</strong> Réseaux de neurones artificiels.</li>
     </ul>
     </section>
     </section>
@@ -87,7 +87,6 @@
     <!-- Section 1 = 1. IA : modélisation - apprentissage - prédiction--> 
     <section id="ia-modelisation">
       <h2>1. IA : modélisation - apprentissage - prédiction</h2>
-      <!-- <p>Contenu de votre première partie...</p> -->
       <!-- Petit bouton de retour au sommaire si besoin -->
       <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
     </section>
@@ -100,13 +99,13 @@
 
       <!-- A) Schéma + Tâche -->
       <section data-auto-animate id="schema-tache">
-        <h3 data-id="titre" style="font-size: 1.3em">Schéma pour les modèles d'IA</h3>
+        <h3 data-id="titre" style="font-size: 1.1em">Schéma pour les modèles d'IA paramétriques</h3>
 
         <div class="schema-container">
 
           <div class="schema-box main-box">
             <div class="box-tag">Problème</div>
-            <strong>Problème du monde réel</strong>
+            <strong>Issu monde réel</strong>
             <span class="sub-text">Des données & une tâche</span>
           </div>
 
@@ -115,7 +114,7 @@
           <div class="schema-box math-box">
             <div class="box-tag">Modélisation</div>
             <strong>Modélisation mathématique</strong>
-            <span class="sub-text">Espace vectoriel $E = \mathbb{R}^d$</span>
+            <span class="sub-text">Données plongées dans un espace vectoriel $E = \mathbb{R}^d$</span>
             <div class="param-badge">Modèle paramétrique $f_\theta,\; \theta \in \mathbb{R}^p$</div>
           </div>
 
@@ -126,6 +125,7 @@
           <div class="schema-box real-box">
             <div class="box-tag">Application</div>
             <strong>Prédiction dans le monde réel</strong>
+            <span class="sub-text">Utilisation pour un publique donné</span>
           </div>
 
           <div class="schema-arrow">←</div>
@@ -133,32 +133,35 @@
           <div class="schema-box opt-box">
             <div class="box-tag">Optimisation</div>
             <strong>Minimisation d'une fonction de coût</strong>
-            <span class="sub-text">Résolution dans l'espace d'arrivée $F$</span>
+            <span class="sub-text">Trouver les meilleurs paramètres $\theta^*$</span>
           </div>
 
         </div>
 
         <div class="tache-container fragment fade-up">
-          <div class="tache-header">Définition de la tâche</div>
+          <div class="tache-header">Deux exemples de tâches </div>
           <div class="tache-grid">
 
             <div class="tache-card card-reg">
               <div class="tache-title">Régression</div>
-              <p>Prédire un vecteur $f_\theta(x)$ dans un espace normé $(F, \|\cdot\|)$ </p>
+              <p>Prédire un vecteur $f_\theta(X)$ dans un espace normé $(F, \|\cdot\|)$.</p>
+              <p class="tache-ex">Ex : prédire le prix $P$ de vente d'un bien immobilier en fonction de caractéristiques $C$.</p>
               <span class="math-detail">
-                $F = \mathbb{R}^d$, $\;f_\theta(x) \in \mathbb{R}^d$
+                Modélisation : une fonction à valeurs réelles $f_{\theta}(C) = \hat{P} \approx P$
                 <br>
-                Coût : $\|y - f_\theta(x)\|_2^2$
+                Coût : les moindres carrés $\|P - f_\theta(C)\|_2^2$
               </span>
             </div>
 
             <div class="tache-card card-clf">
               <div class="tache-title">Classification</div>
-              <p>Prédire une loi de probabilité $p_\theta(\cdot\,|\,x)$ sur l'espace des classes $(\mathcal{Y}, \mathcal{A})$ </p>
+              <p>Prédire une loi de probabilité $p_\theta(\cdot\,|\,X)$ sur l'espace des classes $(\mathcal{Y}, \mathcal{A})$ </p>
+              <p class="tache-ex">Ex : prédire si un tweet $T$ comporte des propos haineux $H$.</p>
               <span class="math-detail">
-                Binaire : $\mathcal{Y}=\{0,1\}$, $\;p_\theta(\cdot\,|\,x) = \sigma(f_\theta(x)) \in \Delta(\mathcal{Y})$
+              <span class="math-detail">
+                Modélisation : cas binaire $\mathcal{H}=\{0,1\}$, $\;p_\theta(\cdot\,|\,T) = \sigma(f_\theta(T)) \in \Delta(\mathcal{H})$
                 <br>
-                Coût : $KL\big(\delta_y \,\|\, p_\theta(\cdot\,|\,x)\big) = -\log p_\theta(y\,|\,x)$
+                Coût : l'entropie croisée $-\log p_\theta(H\,|\,T) = KL\big(\delta_H \,\|\, p_\theta(\cdot\,|\,T)\big)$
               </span>
             </div>
           </div>
@@ -167,32 +170,32 @@
 
       <!-- B) Transport vers l'espace latent -->
       <section data-auto-animate id="transport-1">
-        <h3 data-id="titre">Ce que fait un modèle de classification</h3>
+        <h3 data-id="titre">Visualiser un modèle de classification</h3>
         <img data-id="fig" src="assets/img/01_espace_initial.png"
             alt="Nuage de points bleus et rouges imbriqués dans l'espace initial"
             style="max-height: 430px; width: auto; display: block; margin: 0 auto;">
-        <p>Les deux classes sont imbriquées, aucune frontière linéaire.</p>
+        <p>Les deux classes sont imbriquées, aucune frontière linéaire ne les sépare.</p>
       </section>
 
       <section data-auto-animate id="transport-2">
-        <h3 data-id="titre">Ce que fait un modèle de classification</h3>
+        <h3 data-id="titre">Visualiser un modèle de classification</h3>
         <img data-id="fig" src="assets/img/02_espace_latent.png"
             alt="Les deux classes séparées par un hyperplan dans l'espace latent"
             style="max-height: 430px; width: auto; display: block; margin: 0 auto;">
-        <p>$f_\theta$ transporte les données vers un nouvel espace de représentations.</p>
+        <p>$f_\theta$ change la géométrie des données en les transportant vers une nouvelle représentation.</p>
       </section>
 
       <section data-auto-animate id="transport-3">
-        <h3 data-id="titre">Ce que fait un modèle de classification</h3>
+        <h3 data-id="titre">Visualiser un modèle de classification</h3>
         <img data-id="fig" src="assets/img/03_sigmoide.png"
             alt="Courbe sigmoïde transformant les logits en probabilités"
             style="max-height: 400px; width: auto; display: block; margin: 0 auto;">
-        <p>$\sigma$ est une fonction d'activation pour obtenir une mesure de probabilité $p_\theta(\cdot\,|\,x) \in \Delta(\mathcal{Y})$.</p>
+        <p>$\sigma$ est une fonction d'activation pour obtenir une mesure de probabilité $p_\theta(\cdot\,|\,X) \in \Delta(\mathcal{Y})$.</p>
       </section>
 
       <!-- C) Visualisation réseaux de neurones / Algèbre linéaire -->
       <section data-auto-animate id="modelisation-reseaux-algebre-lineaire">
-        <h3 data-id="titre" style="font-size: 1.3em">Algèbre linéaire & réseaux de neurones</h3>
+        <h3 data-id="titre" style="font-size: 1.3em">Réseaux de neurones & Algèbre linéaire</h3>
 
         <div class="split-2">
 
@@ -206,13 +209,13 @@
           <div class="split-col split-right">
             <div class="fragment fade-right">
               <p class="split-intro">Interprétation matricielle d'une couche :</p>
-              <img src="assets/img/couche_matrices.png"
+              <img src="assets/img/04_couche_matrices.png"
                   alt="Produit matriciel W·x + b suivi d'une activation"
                   class="split-img">
             </div>
 
             <ul class="split-list">
-              <li class="fragment fade-right">Transformations affines : $W \cdot x + b$</li>
+              <li class="fragment fade-right">Transformations affines : $W \cdot X + b$</li>
               <li class="fragment fade-right">Fonctions d'activation non linéaires</li>
               <li class="fragment fade-right">Changements de repère et transformation de la géométrie</li>
             </ul>
@@ -228,17 +231,21 @@
         <div style="font-size: 0.45em; text-align: left; border-left: 4px solid #1F6FB2;
                     padding: 0 0 0 0.8em;">
           <p style="margin: 0;"><strong>Théorème</strong> (Pinkus, 1999).
-            Soit \(\sigma \in \mathcal{C}(\mathbb{R}, \mathbb{R})\), appliquée coordonnée par coordonnée.
+            Soit \(\sigma \in \mathcal{C}(\mathbb{R}, \mathbb{R})\).
             \(\sigma\) n'est pas polynomiale si et seulement si :</p>
-          \[
-            \begin{aligned}
-              &\forall K \subset \mathbb{R}^n \text{ compact},\ \forall f \in \mathcal{C}(K, \mathbb{R}^m),\
-              \forall \varepsilon > 0,\ \exists\, k \in \mathbb{N},\\
-              &A \in \mathbb{R}^{k \times n},\ b \in \mathbb{R}^{k},\ C \in \mathbb{R}^{m \times k}
-              \ \text{ tels que } \
-              \sup_{x \in K} \big\| f(x) - C\,\sigma(Ax + b) \big\| < \varepsilon .
-            \end{aligned}
-          \]
+            \[
+              \begin{aligned}
+                &\forall K \subset \mathbb{R}^n \text{ compact},\ \forall f \in \mathcal{C}(K, \mathbb{R}^m),\
+                \forall \varepsilon > 0,\ \exists\, k \in \mathbb{N},\\
+                &A \in \mathbb{R}^{k \times n},\ b \in \mathbb{R}^{k},\ C \in \mathbb{R}^{m \times k}
+                \ \text{ tels que } \
+                \sup_{X \in K} \big\| f(X) - C\,\sigma(AX + b) \big\| < \varepsilon .
+              \end{aligned}
+            \]
+            <p style="margin: 0;">
+              Pour \(z = (z_1, \dots, z_k) \in \mathbb{R}^k\), \(\sigma(z) = \big(\sigma(z_1), \dots, \sigma(z_k)\big)\) :
+              \(\sigma\) est appliquée à chacune des composantes.
+            </p>
         </div>
 
         <p style="font-size: 0.45em; text-align: left; margin: 0.4em 0 0;">
@@ -252,8 +259,7 @@
           Cybenko (1989) · Hornik (1989) · Pinkus (1999)
         </p>
         <p style="font-size: 0.45em; margin: 0;">
-          Résultat d'<em>existence</em> : rien sur la taille \(k\), sur l'apprentissage des poids,
-          ni sur la généralisation.
+          Résultat d'<em>existence</em> : rien sur la taille \(k\) ni sur la valeurs des poids.
         </p>
 
         <aside class="notes">
@@ -272,33 +278,26 @@
 
     <!-- A) Initialisation et fonction de coût -->
     <section data-auto-animate id="optimisation-cout">
-    <!-- Resserre les marges des équations display sur cette slide uniquement -->
-    <style>
-      #optimisation-cout .katex-display,
-      #optimisation-cout mjx-container[display="true"],
-      #optimisation-cout .MathJax_Display { margin: 0.3em 0 !important; }
-    </style>
 
-    <h3 data-id="titre" style="font-size: 1.3em">Apprentissage : minimiser un coût</h3>
+    <h3 data-id="titre" style="font-size: 1.3em">Initialisation & Fonction de coût</h3>
 
     <div style="font-size: 0.6em; text-align: left; margin-top: 0.5em;">
 
-    <p><strong>Initialisation</strong> : poids tirés au hasard, ni trop grands
-          (<em>explosion</em> du gradient) ni trop petits (<em>vanishing</em> du gradient).</p>
+    <p>Choix empirique d'une architecture neuronale et poids tirés au hasard, ni trop grands ni trop petits.</p>
 
     <!-- Bicolonne : méthodes d'initialisation -->
     <div style="display: flex; gap: 1.5em; margin: 0.3em 0 0.5em;">
     <div style="flex: 1; border-left: 3px solid #888; padding-left: 0.8em;">
     <p style="margin: 0 0 0.3em;"><strong>Xavier (Glorot)</strong> — tanh, sigmoïde</p>
             \[
-              W \sim \mathcal{U}\big([-x,\, x]\big), \quad
+              \theta \sim \mathcal{U}\big([-x,\, x]\big), \quad
               x = \sqrt{\frac{6}{n_{\text{in}} + n_{\text{out}}}}
             \]
     </div>
     <div style="flex: 1; border-left: 3px solid #888; padding-left: 0.8em;">
     <p style="margin: 0 0 0.3em;"><strong>Kaiming (He)</strong> — ReLU</p>
             \[
-              W \sim \mathcal{N}\!\left(0,\, \frac{2}{n_{\text{in}}}\right)
+              \theta \sim \mathcal{N}\!\left(0,\, \frac{2}{n_{\text{in}}}\right)
             \]
     </div>
     </div>
@@ -306,9 +305,9 @@
           \(n_{\text{in}}, n_{\text{out}}\) : nombre de neurones en entrée / en sortie de la couche
     </p>
 
-    <p class="fragment"><strong>Coût sur un batch aléatoire d'exemples </strong> \(B\) :
+    <p class="fragment"><strong>Minimiser un coût moyen par batch aléatoire d'exemples </strong> \(B\) :
                   \[
-                    \mathcal{L}_B(\theta) = \frac{1}{|B|} \sum_{i \in B} \ell\big(f_\theta(x_i),\, y_i\big)
+                    \mathcal{L}_B(\theta) = \frac{1}{|B|} \sum_{i \in B} \ell\big(f_\theta(X_i),\, Y_i\big)
                   \]
     </p>
 
@@ -317,15 +316,15 @@
     </div>
 
     <aside class="notes">
-                Xavier : pensé pour des activations symétriques (tanh), équilibre fan-in et fan-out.
+                Xavier : pensé pour des activations symétriques (tanh) et équilibré.
                 Kaiming : le facteur 2 compense la ReLU qui annule la moitié des activations.
-                Dans Kaiming, 2/n_in est la variance (écart-type = racine de 2/n_in).
+                Dans Kaiming, 2/n_in est la variance.
     </aside>
   </section>
 
     <!-- B) Descente de gradient -->
     <section data-auto-animate id="descente-gradient">
-      <h3 data-id="titre" style="font-size: 1.3em">Descente de gradient stochastique</h3>
+      <h3 data-id="titre" style="font-size: 1.3em">Optimisation par descente de gradient stochastique</h3>
 
       <div style="font-size: 0.5em;">
         \[
@@ -341,37 +340,248 @@
             style="margin: 0.2em 0 0;"></video>
 
       <aside class="notes">
-        → pour lancer la vidéo, ← pour revenir au poster.
         On part de θ₀, puis à chaque pas on tire un batch B_t et on fait un pas dans la
-        direction opposée au gradient. η : pas d'apprentissage. Le gradient est calculé
-        par rétropropagation.
-        Paysage jouet à 2 paramètres, avec de nombreux minima locaux. Le bruit du mini-batch
-        permet à la trajectoire rouge de sortir des petits puits et d'atteindre le plus
-        profond, où elle oscille pendant que le bruit diminue.
+        direction opposée au gradient. η : pas d'apprentissage (learning rate). Le gradient est calculé
+        par rétropropagation. Paysage jouet à 2 paramètres, avec de nombreux minima locaux.
       </aside>
     </section>
 
-    <!-- C) La malédiction de la dimension -->
-    <section id="cruse_of_dimension">
+    <!-- C) La malédiction de la dimension : pavage d = 1, 2, 3 -->
+    <section data-auto-animate id="malediction-dimension">
+      <h3 data-id="titre" style="font-size: 1.3em">Le big data pour recouvrir l'espace</h3>
+      <p class="dim-intro">
+        Pour apprendre $f$, il faut suffisamment d'exemples $(X_i, Y_i)$ qui recouvrent l'espace.
+      </p>
+      <p class="dim-intro">
+        Or le pavage uniforme de l'hypercubde de dimension $d$ avec un pas $\delta$ demande $(2/\delta + 1)^d$ points.
+      </p>
+        
+      
+
+      <div class="r-stack dim-stack">
+        <video id="video-dim-1" class="fragment fade-in-then-out" data-video="video-dim-1"
+               data-rate="1" muted playsinline preload="auto"
+               src="assets/videos/dim_1.mp4" poster="assets/img/dim_1_poster.png"></video>
+        <video id="video-dim-2" class="fragment fade-in-then-out" data-video="video-dim-2"
+               data-rate="1" muted playsinline preload="auto"
+               src="assets/videos/dim_2.mp4" poster="assets/img/dim_2_poster.png"></video>
+        <video id="video-dim-3" class="fragment" data-video="video-dim-3"
+               data-rate="1" muted playsinline preload="auto"
+               src="assets/videos/dim_3.mp4" poster="assets/img/dim_3_poster.png"></video>
+      </div>
+
+      <aside class="notes">
+        La part de la boule dans le cube baisse dès d = 2 : 1 ; 0,785 ; 0,524.
+        La proportion mesurée sur la grille est un peu sous le rapport exact :
+        avec δ = 0,25, les points du bord pèsent beaucoup.
+      </aside>
+    </section>
+
+    <!-- D) La malédiction de la dimension : bilan -->
+    <section data-auto-animate id="malediction-bilan">
       <h3 data-id="titre" style="font-size: 1.3em">La malédiction de la dimension</h3>
-      Les modèles de réseaux de neurones vont de quelques millions à des centaines de milliards de paramètre aujourd'hui.
-      - pour des images, modélisé par des vecteurs de taille 1024*1024 on est dans un espace de grande dimension, les distance n'ont plus de sens ?  
-      - Un recouvrement de l'espace pour avoir un bon échantillonnage de la fonction objectif demande un volume d'exemple (x,y) non gigantesque
-      - deux vecteurs centré tiré de manière aléatoire sont presque tjs orthogonaux donc les poids de chaque neuronne induisent des directions indépendantes (resultat du à la loi des grand nombre)
-      - le ratio entre le volume de la boule unité pour la distance euclidienne est écrasée par le volume de l'hypercude = 2^d, les poids sont tous isolés  
-      generer une modélisation de la boule de dim 2, 3 et 4 dans lhypercube en animation pour d=4 avec vision temporelle ? un avis 
+      <span class="fragment" data-video="video-dim-bilan"></span>
+
+      <video id="video-dim-bilan" class="r-stretch" muted playsinline preload="auto"
+             data-rate="1" src="assets/videos/dim_bilan.mp4"
+             poster="assets/img/dim_bilan_poster.png"></video>
+
+
+      <div class="fragment dim-conclusion">
+        <ul>
+          <li>Le volume part dans les coins : les observations sont plus isolées.</li>
+          <li>En pratique, les données réelles ne sont pas réparties uniformément, elles se concentrent
+            près d'une <strong>variété de petite dimension</strong>. C'est ce qui rend l'apprentissage
+            possible, à condition de disposer d'un volume de données significatif.</li>
+        </ul>
+      </div>
+
+      <aside class="notes">
+        <div >
+        <ul>
+          <li>Une image 1024 × 1024 en couleur : d ≈ 3 millions, donc 10^(3 millions) points.</li>
+          <li>En mathématiques, une variété est un espace topologique qui ressemble localement à l'espace euclidien près de chaque point.</li>
+          <li>Si c'était vraiment ça, aucun classifieur d'images ne marcherait : les images naturelles occupent une toute petite partie de l'espace (hypothèse de la variété).</li>
+          <li>Une variété est un espace topologique qui ressemble localement à l'espace euclidien près de chaque point. Ex : un cercle est une variété de dimension 1 car le voisinage de chacun de ses points peut être associé à un segment.</li>
+          <li>Ordres de grandeur :
+              • MNIST (chiffres manuscrits 28 × 28) : d = 784, donc 9^784 ≈ 10^748 points théoriquement.
+                Dimension intrinsèque estimée entre 7 et 13, soit 9^12 ≈ 10^11.
+                On dispose de 60 000 images d'entraînement, et ça marche très bien.
+              • ImageNet (photos 224 × 224 en couleur) : d = 150 528, donc 9^d ≈ 10^143_640 points théoriquement.
+                Dimension intrinsèque estimée entre 26 et 43, soit 9^43 ≈ 10^41.
+                On dispose d'environ 1,3 million d'images d'entraînement.
+          </li>
+        </ul>
+      </div>
+      </aside>
     </section>
 
   </section>
 
+    <!-- Récapitulatif de la partie 1 -->
+    <section id="recap-ia">
+      <h3 style="font-size: 1.3em">En résumé : l'IA par apprentissage automatique</h3>
+
+      <div class="recap-grid">
+        <div class="recap-row recap-modele fragment fade-up">
+          <div class="recap-tag">Modèle</div>
+          <div class="recap-texte">
+            Réseau de neurones : <strong>produits matriciels</strong>  et <strong>fonctions d'activation</strong> empilés en couches.
+          </div>
+          <div class="recap-besoin">Puissance de calcul</div>
+        </div>
+
+        <div class="recap-row recap-apprentissage fragment fade-up">
+          <div class="recap-tag">Apprentissage</div>
+          <div class="recap-texte">
+            Poids <strong>initialisés au hasard</strong>, puis ajustés par
+            <strong>descente de gradient</strong>.
+          </div>
+          <div class="recap-besoin">Temps de calcul</div>
+        </div>
+
+        <div class="recap-row recap-donnees fragment fade-up">
+          <div class="recap-tag">Données</div>
+          <div class="recap-texte">
+            Décrire correctement l'espace utile avec de <strong>très gros volumes</strong>
+            d'exemples.
+          </div>
+          <div class="recap-besoin">Stockage</div>
+        </div>
+      </div>
+
+      <p class="recap-transition fragment">Sur quelles machines entraîner ces modèles ?</p>
+
+    </section>
 
 
+    <!-- ========================================== -->
+    <!-- SECTION 2 : RESSOURCES DE CALCUL ET DE STOCKAGE (pile verticale) -->
+    <!-- ========================================== -->
+    <section>
 
-    <!-- Section 2 -->
-    <section id="ressources-calcul">
-      <h2>2. Ressources de calcul et de stockage</h2>
-      <!-- <p>Contenu de votre deuxième partie (HPC, GPU, clusters...)...</p> -->
-      <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
+      <!-- Titre de la section -->
+      <section id="ressources-calcul">
+        <h2>2. Ressources de calcul et de stockage</h2>
+        <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
+      </section>
+
+      <!-- A) CPU et GPU -->
+      <section id="cpu-gpu">
+        <h3 style="font-size: 1.3em">Puissance de calcul : CPU et GPU</h3>
+
+        <div class="materiel-grid">
+          <div class="materiel-col materiel-cpu">
+            <img src="assets/img/cpu.webp" alt="Schéma d'un processeur (CPU) : quelques cœurs et un grand cache">
+            <div class="materiel-nom">CPU — processeur central</div>
+            <ul class="materiel-list">
+              <li class="fragment">Cœurs <strong>puissants et polyvalents</strong> (de 8 à 128)</li>
+              <li class="fragment">Enchaîne très vite différentes tâches - <strong>Séquenciel</strong> </li>
+            </ul>
+          </div>
+
+          <div class="materiel-col materiel-gpu">
+            <img src="assets/img/gpu.webp" alt="Schéma d'une carte graphique (GPU) : des milliers de petits cœurs">
+            <div class="materiel-nom">GPU — carte graphique</div>
+            <ul class="materiel-list">
+              <li class="fragment">Des <strong>milliers de cœurs simples</strong> (6 912 sur un A100)</li>
+              <li class="fragment">Fait beaucoup d'opérations simples - <strong>Parallèlise</strong></li>
+            </ul>
+          </div>
+        </div>
+
+        <p class="credit">Images : GeeksforGeeks, « Difference between CPU and GPU »</p>
+
+        <aside class="notes">
+          CPU : optimisé pour la latence, finir chaque tâche le plus vite possible.
+          GPU : optimisé pour le débit, traiter énormément de données en parallèle.
+          Un produit matriciel = des millions de multiplications-additions indépendantes :
+          exactement ce que le GPU sait faire.
+        </aside>
+      </section>
+
+      <!-- A_bis) Chacun ses limites
+      <section id="cpu-gpu-limites">
+        <h3 style="font-size: 1.3em">Chacun ses limites</h3>
+
+        <div class="limite-grid">
+          <div class="limite-card limite-cpu fragment fade-up">
+            <div class="limite-titre">Trop dur pour un CPU</div>
+            <p><strong>Entraîner un réseau de neurones</strong> : des milliards de multiplications
+              identiques et indépendantes.</p>
+            <p>Les quelques cœurs les traitent presque une par une :
+              un entraînement de quelques heures sur GPU peut prendre des semaines.</p>
+          </div>
+
+          <div class="limite-card limite-gpu fragment fade-up">
+            <div class="limite-titre">Trop dur pour un GPU</div>
+            <p><strong>Un algorithme séquentiel plein de branchements</strong> : parcourir un arbre
+              de recherche, lire et décompresser des fichiers.</p>
+            <p>Chaque étape dépend de la précédente :
+              les milliers de cœurs attendent sans rien faire.</p>
+          </div>
+        </div>
+
+        <aside class="notes">
+          Clin d'œil à l'IA symbolique : les solveurs et la recherche arborescente
+          tournent sur CPU. Le GPU n'est pas « plus puissant » dans l'absolu :
+          il est spécialisé.
+        </aside>
+      </section> -->
+
+      <!-- B) CPU + GPU : le travail en équipe -->
+      <section id="cpu-gpu-equipe">
+        <h3 style="font-size: 1.3em">Un entraînement en binôme</h3>
+
+        <img class="r-stretch" src="assets/img/cpu_gpu_entrainement.svg"
+             alt="Le stockage envoie les données au CPU qui prépare les batchs pour le GPU ; le GPU calcule ; le CPU sauvegarde les poids">
+
+      </section>
+
+     <!-- C) GLiCID -->
+    <section id="glicid">
+      <h3 style="font-size: 1.3em">GLiCID : HPC des Pays de la Loire</h3>
+
+      <div class="glicid-grid">
+        <div>
+          <img class="glicid-logo" src="assets/img/glicid_logo.svg" alt="Logo GLiCID">
+          <img class="glicid-photo" src="assets/img/baie_serveurs.png"
+              alt="Baie de serveurs de calcul, un serveur sorti de son rack">
+        </div>
+
+        <div>
+          <p class="glicid-intro">Centre de calcul mutualisé des universités d'Angers, Nantes, Le Mans
+            et de Centrale Nantes.</p>
+
+          <table class="glicid-table">
+            <thead>
+              <tr><th>Cluster</th><th>CPU (AMD EPYC)</th><th>GPU (NVIDIA)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Nautilus</strong> (2023)</td><td>5 376 cœurs</td><td>16 A100 · 8 A40</td></tr>
+              <tr><td><strong>Aouda</strong> (nov. 2026)</td><td>10 240 cœurs</td><td>24 H200</td></tr>
+              <tr><td><strong>Total GLiCID</strong></td><td>&gt; 19 500 cœurs</td><td>85 GPU</td></tr>
+            </tbody>
+          </table>
+
+          <ul class="materiel-list fragment">
+            <li>Stockage : <strong>30 Go</strong> par personne en <code>/home</code>,
+              <strong>713 To</strong> partagés pour les calculs </li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="credit">Sources : glicid.fr, doc.glicid.fr</p>
+
+      <aside class="notes">
+        - https://www.glicid.fr/equipements.html
+        C'est sur Nautilus que je fais tourner mes expériences de thèse.
+        Accès sur demande, pour les personnels de recherche de la région.
+        Ordre de grandeur : les poids d'un modèle de 70 milliards de paramètres font 140 Go,
+        soit près de 5 fois mon /home.
+      </aside>
+    </section>
+
     </section>
 
     <!-- Section 3 -->

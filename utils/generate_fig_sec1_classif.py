@@ -88,7 +88,7 @@ ax = fig.add_subplot(111, projection="3d")
 
 # On dessine le rouge d'abord (externe) puis le bleu, pour que le noyau
 # reste visible au travers de la coquille.
-ax.scatter(*X_rouge.T, c=ROUGE, s=30, alpha=.55,
+ax.scatter(*X_rouge.T, c=ROUGE, s=30, alpha=.75,
            edgecolors="#7A2318", linewidths=.4,
            depthshade=False, label="label 1")
 ax.scatter(*X_bleu.T,  c=BLEU,  s=30, alpha=.95, edgecolors="none",
@@ -176,15 +176,15 @@ for vals, coul, lab in [(logit_bleu, BLEU, "label 0"), (logit_rouge, ROUGE, "lab
     axp.scatter(rng.uniform(.12, .88, len(p)), p, c=coul, s=15, alpha=.40,
                 edgecolors="none", zorder=4)
 
-ax.annotate(r"$p_\theta(\cdot\,|\,x) = \sigma(f_\theta(x))$",
+ax.annotate(r"$p_\theta(1 \,|\,x) = \sigma(f_\theta(x))$",
             xy=(2.6, .22), fontsize=13, color=ENCRE)
 
-ax.set_xlabel("logit  $f_\\theta(x)[0]$", fontsize=11)
+ax.set_xlabel("logit  $f_\\theta(x)$", fontsize=11)
 ax.set_ylabel("probabilité prédite", fontsize=11)
 ax.set_xlim(-9, 9)
 ax.set_ylim(-.09, 1.09)
 ax.set_yticks([0, .5, 1])
-ax.set_title("Des logits aux probabilités", fontsize=12, color=ENCRE, pad=12)
+ax.set_title("Des logits aux probabilités - Activation sigmoïde", fontsize=12, color=ENCRE, pad=12)
 leg = ax.legend(loc="upper left", frameon=False, fontsize=10, handletextpad=.3)
 for h in leg.legend_handles:
     h.set_alpha(1)

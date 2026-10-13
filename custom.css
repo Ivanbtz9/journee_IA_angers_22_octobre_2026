@@ -1,160 +1,200 @@
-/* Quelques réglages sobres, à adapter */
+/* ==========================================================
+   custom.css — Journée de l'IA, Angers
+   Ordre : variables, base, utilitaires, sommaire, fragments,
+   puis les styles propres à chaque slide, dans l'ordre du diaporama.
+   ========================================================== */
+
+
+/* ---------- 1. Variables ---------- */
 
 :root {
-    --r-main-font: "Source Sans Pro", system-ui, sans-serif;
-    --r-heading-font: "Source Sans Pro", system-ui, sans-serif;
-    --r-heading-text-transform: none;   /* pas de MAJUSCULES automatiques */
-    --accent: #1f4e79;
+  /* Reveal.js */
+  --r-main-font: "Source Sans Pro", system-ui, sans-serif;
+  --r-heading-font: "Source Sans Pro", system-ui, sans-serif;
+  --r-heading-text-transform: none;      /* pas de majuscules automatiques */
+
+  /* Texte et traits */
+  --accent: #1f4e79;                     /* titres */
+  --texte: #222;
+  --texte-doux: #555;
+  --trait: #ccc;
+
+  /* Une couleur par étape du schéma, réutilisée partout */
+  --bleu: #1f6fb2;                       /* modélisation, régression */
+  --rouge: #c0392b;                      /* optimisation, classification */
+  --gris-bleu: #647187;                  /* problème, données */
+  --vert: #2e7d55;                       /* application */
+  --vert-exemple: #1f7a3a;               /* exemples dans les cartes */
 }
-.reveal h1, .reveal h2, .reveal h3 { color: var(--accent); font-weight: 600; }
-.reveal section { text-align: left; }        /* titre centré via .center */
+
+
+/* ---------- 2. Base ---------- */
+
+.reveal h1,
+.reveal h2,
+.reveal h3 {
+  color: var(--accent);
+  font-weight: 600;
+}
+
+.reveal section { text-align: left; }    /* les slides de titre utilisent .center */
+
+
+/* ---------- 3. Utilitaires ---------- */
+
 .reveal .center { text-align: center; }
-.reveal .cols { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2em; align-items: center; }
-.reveal .small { font-size: 0.7em; }
-.reveal .ref { color: #666; font-size: 0.55em; }
-
-.reveal .toc li::marker { color: var(--accent); font-weight: 600; }
-.reveal .toc li { margin-bottom: 0.4em; }
-
-/* Style personnalisé pour les liens du sommaire */
-.reveal ol li a {
-  color: inherit; /* Conserve la couleur de texte par défaut de la slide */
-  text-decoration: none;
-  transition: color 0.2s ease, border-bottom 0.2s ease;
+.reveal .small  { font-size: 0.7em; }
+.reveal .ref    { font-size: 0.55em; color: var(--texte-doux); }
+.reveal .cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.2em;
+  align-items: center;
 }
 
-/* Effet lors du survol de la souris */
+
+/* ---------- 4. Sommaire ---------- */
+
+.reveal ol li a {
+  color: inherit;
+  text-decoration: none;
+}
 .reveal ol li a:hover {
-  color: #bd93f9; /* Couleur d'accentuation (ex: violet/rose) */
+  color: var(--accent);
   text-decoration: underline;
 }
 
-/* Démo interactive */
-#demo-bar { height: 22px; background: var(--accent); width: 50%; border-radius: 3px; transition: width .15s; }
-#demo-slider { width: 100%; }
+
+/* ---------- 5. Fragments ---------- */
+
+/* Glissement latéral plus marqué que celui de Reveal */
+.reveal .fragment.fade-right         { transform: translateX(-40px); }
+.reveal .fragment.fade-right.visible { transform: translateX(0); }
 
 
-/* ===== Schéma global & tâches d'IA ===== */
-#schema-tache h3 { font-size: 30px; margin: 0 0 20px; }
+/* ---------- 6. Slide « Schéma pour les modèles d'IA » ---------- */
 
-/* Empêche KaTeX de grossir les formules (1.21em par défaut) */
-#schema-tache .katex { font-size: 1em; }
+#schema-tache h3     { font-size: 30px; margin: 0 0 20px; }
+#schema-tache .katex { font-size: 1em; }  /* KaTeX grossit les formules par défaut */
 
 .schema-container {
   display: grid;
   grid-template-columns: 1fr 54px 1fr;
   grid-template-rows: auto 30px auto;
+  align-items: center;
   max-width: 850px;
   margin: 0 auto;
-  align-items: center;
 }
 
 .schema-box {
   position: relative;
-  background: #fff;
-  border: 1px solid #DCDCD6;
-  border-top: 3px solid var(--stage);
-  border-radius: 4px;
   padding: 18px 16px 14px;
+  border: 1.5px solid var(--stage);
+  border-radius: 6px;
+  background: #fff;
   text-align: center;
-  box-shadow: 0 1px 3px rgba(20, 20, 26, .08);
 }
 .schema-box strong {
   display: block;
   font-size: 16px;
   font-weight: 600;
   line-height: 1.25;
-  color: #14141A;            /* corrige le texte blanc sur blanc */
+  color: var(--texte);
 }
 .schema-box .sub-text {
   display: block;
   margin-top: 6px;
   font-size: 13px;
   line-height: 1.35;
-  color: #5A5A63;
+  color: var(--texte-doux);
 }
 
+/* Étiquette posée sur le cadre, comme une légende de fieldset */
 .box-tag {
   position: absolute;
-  top: -10px; left: 14px;
-  background: var(--stage);
-  color: #fff;
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 9px;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  padding: 2px 8px;
-  border-radius: 2px;
+  top: -0.75em;
+  left: 12px;
+  padding: 0 6px;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--stage);
 }
 
-.main-box { --stage: #647187; }
-.math-box { --stage: #1F6FB2; }
-.opt-box  { --stage: #C0392B; }
-.real-box { --stage: #2E7D55; }
+.main-box { --stage: var(--gris-bleu); }
+.math-box { --stage: var(--bleu); }
+.opt-box  { --stage: var(--rouge); }
+.real-box { --stage: var(--vert); }
 
 .param-badge {
   margin-top: 10px;
-  background: #F1F6F2;
-  border: 1px solid #CBE0D2;
-  border-radius: 3px;
-  padding: 7px 10px;
+  padding: 6px 10px;
+  border-top: 1px solid var(--trait);
   font-size: 13px;
-  color: #2E6B4B;
+  color: var(--vert);
 }
 
 .schema-arrow {
   font-size: 22px;
   line-height: 1;
-  color: #A9A9A2;
   text-align: center;
+  color: #999;
 }
 
-/* ===== Bloc « tâche » ===== */
+/* Bloc « Deux exemples de tâches » */
 .tache-container { max-width: 850px; margin: 24px auto 0; }
 
 .tache-header {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 11px;
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: #5A5A63;
-  text-align: left;
-  border-top: 1px solid #DCDCD6;
+  margin-bottom: 10px;
   padding-top: 8px;
-  margin-bottom: 12px;
+  border-top: 1px solid var(--trait);
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--texte-doux);
 }
 
-.tache-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.tache-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+}
 
 .tache-card {
-  background: #fff;
-  border: 1px solid #DCDCD6;
-  border-left: 3px solid var(--stage);
-  border-radius: 4px;
   padding: 12px 14px;
+  border: 1.5px solid var(--stage);
+  border-radius: 6px;
+  background: #fff;
   text-align: left;
 }
-.card-reg { --stage: #1F6FB2; }
-.card-clf { --stage: #C0392B; }
-
-.tache-title { font-size: 15px; font-weight: 600; color: var(--stage); margin-bottom: 5px; }
-.tache-card p { font-size: 13px; line-height: 1.35; margin: 0 0 6px; color: #14141A; }
-.math-detail { font-size: 12px; color: #5A5A63; }
-
-.legende-fig {
-  font-size: 22px;
-  line-height: 1.5;
-  color: #3C3C44;
-  max-width: 760px;
-  margin: 20px auto 0;
+.tache-card p {
+  margin: 0 0 6px;
+  font-size: 13px;
+  line-height: 1.35;
+  color: var(--texte);
 }
-.legende-fig .katex { font-size: 1.05em; color: #14141A; }
+.tache-card .tache-ex {                  /* deux classes : l'emporte sur .tache-card p */
+  font-style: italic;
+  color: var(--vert-exemple);
+}
 
-/* ===== Mise en page bicolonne ===== */
+.card-reg { --stage: var(--bleu); }
+.card-clf { --stage: var(--rouge); }
+
+.tache-title {
+  margin-bottom: 5px;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--stage);
+}
+.math-detail { font-size: 12px; color: var(--texte-doux); }
+
+
+/* ---------- 7. Slide « Algèbre linéaire & réseaux de neurones » ---------- */
+
 #modelisation-reseaux-algebre-lineaire h3 {
+  margin: 0 0 6px;
   font-size: 34px;
   line-height: 1.15;
-  margin: 0 0 6px;
 }
 
 .split-2 {
@@ -166,66 +206,220 @@
   margin: 14px auto 0;
   text-align: left;
 }
-
-.split-col { display: flex; flex-direction: column; }
-
-/* Colonne gauche : le schéma occupe toute la hauteur disponible */
+.split-col  { display: flex; flex-direction: column; }
 .split-left { justify-content: center; }
 
 .split-img {
   display: block;
   width: 100%;
   max-height: 300px;
-  object-fit: contain;
   margin: 0 auto;
-  border-radius: 4px;
+  object-fit: contain;
 }
 .split-left  .split-img { max-height: 380px; }
 .split-right .split-img { max-height: 190px; margin: 0 0 16px; }
 
 .split-credit {
-  font-family: "IBM Plex Mono", monospace;
-  font-size: 11px;
-  letter-spacing: .06em;
-  color: #5A5A63;
   margin: 8px 0 0;
+  font-size: 13px;
+  font-style: italic;
   text-align: center;
+  color: var(--texte-doux);
 }
 
 .split-intro {
-  font-size: 20px;
-  color: #3C3C44;
   margin: 0 0 12px;
+  font-size: 20px;
+  color: var(--texte);
 }
 
-/* Liste : marqueur natif neutralisé, tiret redessiné en ::before */
+/* Liste à tirets */
 .reveal .split-list {
-  list-style: none;
-  list-style-type: none;
   margin: 0;
   padding: 0;
+  list-style: none;
   font-size: 19px;
   line-height: 1.45;
 }
 .reveal .split-list li {
-  list-style: none;
-  list-style-type: none;
   position: relative;
-  padding-left: 20px;
   margin-bottom: 12px;
+  padding-left: 20px;
+  list-style: none;
 }
 .reveal .split-list li::marker { content: none; }
 .reveal .split-list li::before {
-  content: "";
+  content: "–";
   position: absolute;
   left: 0;
-  top: .55em;
-  width: 8px;
-  height: 2px;
-  background: #1F6FB2;
+  color: var(--bleu);
 }
-.split-list .katex { font-size: 1.05em; color: #14141A; }
+.split-list .katex { font-size: 1.05em; color: var(--texte); }
 
-/* Amplitude du glissement latéral */
-.reveal .fragment.fade-right { transform: translateX(-40px); }
-.reveal .fragment.fade-right.visible { transform: translateX(0); }
+
+/* ---------- 8. Slide « Apprentissage : minimiser un coût » ---------- */
+
+#optimisation-cout .katex-display { margin: 0.3em 0; }
+
+
+/* ---------- 9. Slides « Malédiction de la dimension » ---------- */
+
+.dim-intro {
+  margin: 0.2em 0 0.5em;
+  font-size: 0.55em;
+  line-height: 1.4;
+  color: var(--texte);
+}
+
+.dim-stack video { width: auto; height: 450px; }
+
+.dim-conclusion {
+  margin: 0.4em 0 0;
+  font-size: 0.5em;
+  line-height: 1.4;
+  color: var(--texte);
+}
+.dim-conclusion ul { margin: 0 0 0 1em; }
+.dim-conclusion li { margin-bottom: 0.3em; }
+
+
+/* ---------- 10. Slide « En résumé » ---------- */
+
+.recap-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  max-width: 900px;
+  margin: 24px auto 0;
+}
+
+.recap-row {
+  display: grid;
+  grid-template-columns: 130px 1fr 200px;
+  gap: 18px;
+  align-items: center;
+  padding: 12px 16px;
+  border: 1.5px solid var(--stage);
+  border-radius: 6px;
+  background: #fff;
+  text-align: left;
+}
+
+.recap-tag {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--stage);
+}
+
+.recap-texte {
+  font-size: 20px;
+  line-height: 1.4;
+  color: var(--texte);
+}
+.recap-texte .katex { font-size: 1em; }
+
+.recap-besoin {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--stage);
+}
+.recap-besoin::before { content: "→ "; }
+
+.recap-modele        { --stage: var(--bleu); }
+.recap-apprentissage { --stage: var(--rouge); }
+.recap-donnees       { --stage: var(--gris-bleu); }
+
+.recap-transition {
+  margin-top: 28px;
+  font-size: 0.6em;
+  font-style: italic;
+  text-align: center;
+  color: var(--accent);
+}
+
+/* ---------- 11. Partie 2 : calcul et stockage ---------- */
+
+/* Ligne de crédit sous les images */
+.reveal .credit {
+  margin: 10px 0 0;
+  font-size: 12px;
+  font-style: italic;
+  text-align: right;
+  color: var(--texte-doux);
+}
+
+/* Listes de la partie 2 */
+.reveal .materiel-list {
+  margin: 0;
+  padding-left: 1.1em;
+  font-size: 19px;
+  line-height: 1.4;
+  color: var(--texte);
+}
+.reveal .materiel-list li { margin-bottom: 8px; }
+
+/* Slide « CPU et GPU » : deux colonnes */
+.materiel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 36px;
+  max-width: 920px;
+  margin: 16px auto 0;
+}
+.materiel-col img {
+  display: block;
+  width: 100%;
+  max-height: 230px;
+  margin: 0 auto 10px;
+  object-fit: contain;
+}
+.materiel-nom {
+  margin-bottom: 8px;
+  font-size: 22px;
+  font-weight: 600;
+  color: var(--stage);
+}
+.materiel-cpu { --stage: var(--bleu); }
+.materiel-gpu { --stage: var(--rouge); }
+
+/* Slide « GLiCID » : logo et photo à gauche, chiffres à droite */
+.glicid-grid {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 30px;
+  align-items: center;
+  max-width: 940px;
+  margin: 16px auto 0;
+}
+.glicid-logo {
+  display: block;
+  height: 48px;
+  margin: 0 0 18px;
+}
+.glicid-photo {
+  display: block;
+  width: 100%;
+  max-height: 380px;
+  object-fit: cover;
+  border-radius: 6px;
+}
+.glicid-intro {
+  margin: 0 0 14px;
+  font-size: 20px;
+  color: var(--texte);
+}
+
+.reveal table.glicid-table {
+  width: 100%;
+  margin: 0 0 16px;
+  border-collapse: collapse;
+  font-size: 18px;
+}
+.reveal .glicid-table th,
+.reveal .glicid-table td {
+  padding: 6px 10px;
+  border-bottom: 1px solid var(--trait);
+  text-align: left;
+}
+.reveal .glicid-table th { font-weight: 600; color: var(--accent); }
+.reveal .glicid-table td { white-space: nowrap; }
