@@ -31,10 +31,13 @@
       <h1>Centre de calculs et modèles d'IA</h1>
       <p>Ivanhoé Botcazou<br><span class="small">Doctorant en intelligence artificielle au LERIA </span></p>
       <p><br><span class="small">22 Octobre 2026</span></p>
-      <aside class="notes">Mes notes visibles avec la touche S.</aside>
+      <aside class="notes" data-markdown>
+        - Notes visibles avec la touche S.
+        - Grand écran (Full) avec la touche F.
+      </aside>
     </section>
 
-    
+
     <!-- Au programme -->
     <section>
       <h2>Au programme</h2>
@@ -67,6 +70,13 @@
     <br><span style="font-size: 0.85em; text-transform: uppercase; letter-spacing: 0.06em;">Photo : Nathaniel Rochester — The Minsky Family</span>
     </p>
     </div>
+
+    <aside class="notes" data-markdown>
+      - Organisée par **Marvin Minsky** et **John McCarthy**
+      - Réuni vingt chercheurs.
+      - John Mc Carthy présente le principe d'élagage alpha-bêta.
+      - McCarthy propose l'expression « intelligence artificielle » comme intitulé du domaine
+    </aside>
     </section>
 
     <section>
@@ -182,7 +192,7 @@
         <img data-id="fig" src="assets/img/02_espace_latent.png"
             alt="Les deux classes séparées par un hyperplan dans l'espace latent"
             style="max-height: 430px; width: auto; display: block; margin: 0 auto;">
-        <p>$f_\theta$ change la géométrie des données en les transportant vers une nouvelle représentation.</p>
+        <p>Le modèle idéal $f_{\theta^*}$ change la géométrie des données en les transportant vers de nouvelles représentations.</p>
       </section>
 
       <section data-auto-animate id="transport-3">
@@ -195,7 +205,7 @@
 
       <!-- C) Visualisation réseaux de neurones / Algèbre linéaire -->
       <section data-auto-animate id="modelisation-reseaux-algebre-lineaire">
-        <h3 data-id="titre" style="font-size: 1.3em">Réseaux de neurones & Algèbre linéaire</h3>
+        <h3 data-id="titre" style="font-size: 1.3em">Modèles mathématiques : réseaux de neurones artificiels</h3>
 
         <div class="split-2">
 
@@ -262,11 +272,11 @@
           Résultat d'<em>existence</em> : rien sur la taille \(k\) ni sur la valeurs des poids.
         </p>
 
-        <aside class="notes">
-          Exemple : chaque neurone est une marche ; en ajoutant des marches, g approche f.
-          Une seule couche cachée suffit : les x ↦ σ(aᵀx + b) engendrent un sous-espace dense de C(K).
-          Cybenko : σ sigmoïdale ; Hornik et al. : σ « squashing » ; Pinkus : toute σ continue
-          non polynomiale, ReLU comprise.
+        <aside class="notes" data-markdown>
+          - Chaque neurone est une marche 
+          - Une seule couche cachée suffit pour approximer toute fct de C(K).
+          - Cybenko : σ sigmoïdale 
+          - Pinkus : toute σ continue non polynomiale, ReLU comprise.
         </aside>
       </section>
   </section>
@@ -315,10 +325,10 @@
                   \(\theta^\star \in \arg\min_\theta \mathcal{L}(\theta)\)</p>
     </div>
 
-    <aside class="notes">
-                Xavier : pensé pour des activations symétriques (tanh) et équilibré.
-                Kaiming : le facteur 2 compense la ReLU qui annule la moitié des activations.
-                Dans Kaiming, 2/n_in est la variance.
+    <aside class="notes" data-markdown>
+                - Xavier : pensé pour des activations symétriques (tanh) et équilibré.
+                - Kaiming : le facteur 2 compense la ReLU qui annule la moitié des activations.<br>
+                 2/n_in est la variance.
     </aside>
   </section>
 
@@ -339,24 +349,33 @@
             poster="assets/img/descente_gradient_poster.png"
             style="margin: 0.2em 0 0;"></video>
 
-      <aside class="notes">
-        On part de θ₀, puis à chaque pas on tire un batch B_t et on fait un pas dans la
-        direction opposée au gradient. η : pas d'apprentissage (learning rate). Le gradient est calculé
-        par rétropropagation. Paysage jouet à 2 paramètres, avec de nombreux minima locaux.
+      <aside class="notes" data-markdown>
+        - On part de θ₀ 
+        - De manière itérative on tire un batch B_t (étape par étape)
+        - on fait un pas dans la direction opposée au gradient
+        - η : pas d'apprentissage (learning rate)
+        - Le gradient est calculé par rétropropagation. 
+        - Paysage jouet à 2 paramètres
       </aside>
     </section>
 
     <!-- C) La malédiction de la dimension : pavage d = 1, 2, 3 -->
     <section data-auto-animate id="malediction-dimension">
       <h3 data-id="titre" style="font-size: 1.3em">Le big data pour recouvrir l'espace</h3>
-      <p class="dim-intro">
-        Pour apprendre $f$, il faut suffisamment d'exemples $(X_i, Y_i)$ qui recouvrent l'espace.
-      </p>
-      <p class="dim-intro">
-        Or le pavage uniforme de l'hypercubde de dimension $d$ avec un pas $\delta$ demande $(2/\delta + 1)^d$ points.
-      </p>
-        
-      
+      <div class="dim-intro">
+        <ul>
+          <li>Pour apprendre $f_{\theta^*}$, il faut suffisamment d'exemples $(X_i, Y_i)$ qui recouvrent l'espace.</li>
+          <li>La dimension $d$ de l'espace de représentation $X \in \mathbb{R}^d$ détermine le nombre d'exemples nécessaires.</li>
+          <li>$\Rightarrow$ Paver uniformément l'hypercube $[-1,1]^d$ avec un pas $\delta > 0$ demande $(2/\delta + 1)^d$ points.</li>
+        </ul>
+      </div>
+
+      <aside class="notes" data-markdown>
+        - La subdivision uniforme avec δ = 0,25 
+        - d=1 l'hypercube - ici le segment [-1,1] => 9 points
+        - d=2 l'hypercube - ici le carré de côté 1 => 81 points
+        - d=3 l'hypercube - ici le cube de côté 1 => 729 points
+      </aside>
 
       <div class="r-stack dim-stack">
         <video id="video-dim-1" class="fragment fade-in-then-out" data-video="video-dim-1"
@@ -370,11 +389,7 @@
                src="assets/videos/dim_3.mp4" poster="assets/img/dim_3_poster.png"></video>
       </div>
 
-      <aside class="notes">
-        La part de la boule dans le cube baisse dès d = 2 : 1 ; 0,785 ; 0,524.
-        La proportion mesurée sur la grille est un peu sous le rapport exact :
-        avec δ = 0,25, les points du bord pèsent beaucoup.
-      </aside>
+      
     </section>
 
     <!-- D) La malédiction de la dimension : bilan -->
@@ -389,10 +404,8 @@
 
       <div class="fragment dim-conclusion">
         <ul>
-          <li>Le volume part dans les coins : les observations sont plus isolées.</li>
-          <li>En pratique, les données réelles ne sont pas réparties uniformément, elles se concentrent
-            près d'une <strong>variété de petite dimension</strong>. C'est ce qui rend l'apprentissage
-            possible, à condition de disposer d'un volume de données significatif.</li>
+          <li>Les observations $(X_i)$ sont plus isolées avec la dimension qui augmente.</li>
+          <li>Les données réelles ne sont pas réparties uniformément, elles vivent sur une <strong>variété de petite dimension</strong> rendant l'apprentissage possible, à condition de disposer d'un volume de données significatif.</li>
         </ul>
       </div>
 
@@ -458,15 +471,62 @@
     <!-- ========================================== -->
     <!-- SECTION 2 : RESSOURCES DE CALCUL ET DE STOCKAGE (pile verticale) -->
     <!-- ========================================== -->
+
+    <!-- Titre de la section -->
+    <section id="ressources-calcul">
+      <h2>2. Ressources de calcul et de stockage</h2>
+      <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
+    </section>
+
     <section>
 
-      <!-- Titre de la section -->
-      <section id="ressources-calcul">
-        <h2>2. Ressources de calcul et de stockage</h2>
-        <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
-      </section>
+      <!-- A) GLiCID -->
+    <section id="glicid">
+      <h3 style="font-size: 1.3em">HPC des Pays de la Loire</h3>
 
-      <!-- A) CPU et GPU -->
+      <div class="glicid-grid">
+        <div>
+          <img class="glicid-logo" src="assets/img/glicid_logo.svg" alt="Logo GLiCID">
+          <img class="glicid-photo" src="assets/img/baie_serveurs.png"
+              alt="Baie de serveurs de calcul, un serveur sorti de son rack">
+        </div>
+
+        <div>
+          <p class="glicid-intro">Centre de calcul mutualisé des universités d'Angers, Nantes, Le Mans
+            et de Centrale Nantes.</p>
+
+          <table class="glicid-table">
+            <thead>
+              <tr><th>Cluster</th><th>CPU (AMD EPYC)</th><th>GPU (NVIDIA)</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Nautilus</strong> (2023)</td><td>5 376 cœurs</td><td>16 A100 · 8 A40</td></tr>
+              <tr><td><strong>Aouda</strong> (nov. 2026)</td><td>10 240 cœurs</td><td>24 H200</td></tr>
+              <tr><td><strong>Total GLiCID</strong></td><td>&gt; 19 500 cœurs</td><td>85 GPU</td></tr>
+            </tbody>
+          </table>
+
+          <ul class="materiel-list">
+            <li>Par personne : <strong>30 Go</strong> en <code>/home</code>, <strong>2 To</strong> en <code>/LAB-DATA</code></li>
+            <li>Espace de calcul partagé : <strong>713 To</strong> en <code>/scratch</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <p class="credit">Sources : glicid.fr, doc.glicid.fr</p>
+
+      <aside class="notes" data-markdown>
+        - https://www.glicid.fr/equipements.html
+        - Je fais tourner mes expériences de thèse.
+        - Accès sur demande, pour les personnels de recherche de la région.
+        # Ordres de grandeur : /home (30 Go)
+        - /LAB-DATA personnel : 2 To, soit environ 70 /home 
+        - /scratch de Nautilus : 713 To, soit environ 24 000 /home
+        - 
+      </aside>
+    </section>
+
+      <!-- B) CPU et GPU -->
       <section id="cpu-gpu">
         <h3 style="font-size: 1.3em">Puissance de calcul : CPU et GPU</h3>
 
@@ -500,36 +560,7 @@
         </aside>
       </section>
 
-      <!-- A_bis) Chacun ses limites
-      <section id="cpu-gpu-limites">
-        <h3 style="font-size: 1.3em">Chacun ses limites</h3>
-
-        <div class="limite-grid">
-          <div class="limite-card limite-cpu fragment fade-up">
-            <div class="limite-titre">Trop dur pour un CPU</div>
-            <p><strong>Entraîner un réseau de neurones</strong> : des milliards de multiplications
-              identiques et indépendantes.</p>
-            <p>Les quelques cœurs les traitent presque une par une :
-              un entraînement de quelques heures sur GPU peut prendre des semaines.</p>
-          </div>
-
-          <div class="limite-card limite-gpu fragment fade-up">
-            <div class="limite-titre">Trop dur pour un GPU</div>
-            <p><strong>Un algorithme séquentiel plein de branchements</strong> : parcourir un arbre
-              de recherche, lire et décompresser des fichiers.</p>
-            <p>Chaque étape dépend de la précédente :
-              les milliers de cœurs attendent sans rien faire.</p>
-          </div>
-        </div>
-
-        <aside class="notes">
-          Clin d'œil à l'IA symbolique : les solveurs et la recherche arborescente
-          tournent sur CPU. Le GPU n'est pas « plus puissant » dans l'absolu :
-          il est spécialisé.
-        </aside>
-      </section> -->
-
-      <!-- B) CPU + GPU : le travail en équipe -->
+      <!-- C) CPU + GPU : le travail en équipe -->
       <section id="cpu-gpu-equipe">
         <h3 style="font-size: 1.3em">Un entraînement en binôme</h3>
 
@@ -538,59 +569,33 @@
 
       </section>
 
-     <!-- C) GLiCID -->
-    <section id="glicid">
-      <h3 style="font-size: 1.3em">GLiCID : HPC des Pays de la Loire</h3>
-
-      <div class="glicid-grid">
-        <div>
-          <img class="glicid-logo" src="assets/img/glicid_logo.svg" alt="Logo GLiCID">
-          <img class="glicid-photo" src="assets/img/baie_serveurs.png"
-              alt="Baie de serveurs de calcul, un serveur sorti de son rack">
-        </div>
-
-        <div>
-          <p class="glicid-intro">Centre de calcul mutualisé des universités d'Angers, Nantes, Le Mans
-            et de Centrale Nantes.</p>
-
-          <table class="glicid-table">
-            <thead>
-              <tr><th>Cluster</th><th>CPU (AMD EPYC)</th><th>GPU (NVIDIA)</th></tr>
-            </thead>
-            <tbody>
-              <tr><td><strong>Nautilus</strong> (2023)</td><td>5 376 cœurs</td><td>16 A100 · 8 A40</td></tr>
-              <tr><td><strong>Aouda</strong> (nov. 2026)</td><td>10 240 cœurs</td><td>24 H200</td></tr>
-              <tr><td><strong>Total GLiCID</strong></td><td>&gt; 19 500 cœurs</td><td>85 GPU</td></tr>
-            </tbody>
-          </table>
-
-          <ul class="materiel-list fragment">
-            <li>Stockage : <strong>30 Go</strong> par personne en <code>/home</code>,
-              <strong>713 To</strong> partagés pour les calculs </li>
-          </ul>
-        </div>
-      </div>
-
-      <p class="credit">Sources : glicid.fr, doc.glicid.fr</p>
-
-      <aside class="notes">
-        - https://www.glicid.fr/equipements.html
-        C'est sur Nautilus que je fais tourner mes expériences de thèse.
-        Accès sur demande, pour les personnels de recherche de la région.
-        Ordre de grandeur : les poids d'un modèle de 70 milliards de paramètres font 140 Go,
-        soit près de 5 fois mon /home.
-      </aside>
     </section>
 
-    </section>
-
-    <!-- Section 3 -->
+    <!-- ========================================== -->
+    <!-- SECTION 3 : CAS PARTICULIER DES MODELES DE LANGUES -->
+    <!-- ========================================== -->
     <section id="modeles-langues">
-      <h2>3. Cas particulier : les modèles de langues</h2>
+      <h2>3. Cas particulier : les modèles de langues (LLMs)</h2>
       <!-- <p>Contenu sur les LLM, architecture Transformer, etc...</p> -->
       <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
     </section>
 
+    <section>
+      <section id="llm-definition">
+        <h3>Qu'est-ce qu'un LLM ?</h3>
+
+        <ul style="font-size: 0.7em">
+          <li>Un <strong> gros modèle neuronale</strong> $f_\theta$ (milliards de paramètres) entraîné sur d'énormes corpus de textes.</li>
+          <li> <strong>Classification itérative</strong> : prédire le prochain mot parmi un vocabulaire fixe $\mathcal{V}$
+              (≈ 150K tokens)</li>
+          <li><strong>Un Chatbot</strong> $\Rightarrow$ plusieurs modèles <strong>orchestrés</strong> autour d'un modèle de langue (voix, images, recherche web, sécurité, outils…)</li>
+        </ul>
+
+        <video class="fragment" muted controls preload="auto" src="assets/videos/autoregressif.mp4"
+              style="display: block; max-height: 330px; width: auto; margin: 0.4em auto 0;"></video>
+        </section>
+
+      </section>
 
     <!-- Conclusion -->
     <section class="center">
