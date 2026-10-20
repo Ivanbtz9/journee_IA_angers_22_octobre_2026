@@ -589,7 +589,7 @@
     <li>Un <strong> gros modèle neuronale</strong> $f_\theta$ (milliards de paramètres) entraîné sur d'énormes corpus de textes.</li>
     <li> <strong>Classification itérative</strong> : prédire le prochain mot parmi un vocabulaire fixe $\mathcal{V}$
                   (≈ 150K tokens)</li>
-    <li><strong>Un Chatbot</strong> $\Rightarrow$ plusieurs modèles <strong>orchestrés</strong> autour d'un modèle de langue (voix, images, recherche web, sécurité, outils…)</li>
+    <li><strong>Un Chatbot</strong> $\Rightarrow$ plusieurs modèles (son, images, recherche web, sécurité, outils bureautiques…) <strong>orchestrés</strong> autour d'un gros LLM </li>
     </ul>
   
     <video class="fragment" muted controls preload="auto" src="assets/videos/autoregressif.mp4"
@@ -598,18 +598,19 @@
   
   <!-- ===== Démo 1 : connexion ===== -->
   <section id="demo-ssh">
-  <h3>Démo : connexion à Nautilus</h3>
+  <h3>Connexion à Nautilus</h3>
   <div class="term">
-    <div class="barre"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>ivan@portable — ssh</span></div>
+    <div class="barre"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>ivan@labo — ssh</span></div>
   <pre>
-  <div><span class="p">ivan@portable:~$ </span><span class="tape fragment">ssh nautilus</span></div>
-  <div class="fragment dim">#################################################################
+  <div><span class="p">ivan@labo:~$ </span><span class="tape fragment">ssh nautilus</span></div>
+  <div class="fragment dim">
+  #################################################################
   #   This service is restricted to authorized users only. All    #
   #            activities on this system are logged.              #
   #################################################################
-  
-  Last login: Tue Oct 13 16:31:48 2026</div>
-  <div class="fragment">_   _             _   _ _                    lxkkdc
+
+  Last login: Tue Oct 20 14:25:26 2026 from 194.167.60.12
+
   | \ | |           | | (_) |                   kWNOdc
   |  \| | __ _ _   _| |_ _| |_   _ ___          kW0c
   | . ` |/ _` | | | | __| | | | | / __|         kW0c
@@ -629,6 +630,7 @@
           lKMMMMM0ookKNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWNKOdc
           ckKKKKKx    ldkOKXNWMMMMMMMMMMMMMMMMMMMMMMMWNXK0kdl
                           clodxkkO000KKKKKKK000OOkxdolc
+        
   -----------------------------------------------------------------------------
     Welcome to GLiCID HPC cluster Nautilus
   
@@ -640,50 +642,56 @@
   
   <!-- ===== Démo 2 : réservation d'un GPU ===== -->
   <section id="demo-srun">
-  <h3>Démo : réserver un GPU</h3>
+  <h3>Réserver un GPU en interactif sur un noeud de calcul</h3>
   <div class="term">
     <div class="barre"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>ivan@nautilus — ssh</span></div>
   <pre>
   <div><span class="p">[ibotca@univ-angers.fr@nautilus ~]$ </span><span class="fragment"><span class="tape">srun -M nautilus --qos=debug -p gpu -C gpu_a100 --gres=gpu:1 \</span>
   <span class="p">> </span><span class="tape suite">--time=00:20:00 --pty bash</span></span></div>
 
-  <div class="fragment dim">srun: job 4242424 queued and waiting for resources
-  srun: job 4242424 has been allocated resources</div>
-  <!-- À REMPLACER : nom du nœud réel -->
+  <div class="fragment dim">srun: job 4242424 queued and waiting for resources</div>
+  <div class="fragment dim">srun: job 4242424 has been allocated resources</div>
+  
   <div class="fragment"><span class="p">[ibotca@univ-angers.fr@gnode2 ~]$ </span><span class="tape">nvidia-smi --query-gpu=name,memory.total --format=csv,noheader</span></div>
   <div class="fragment">NVIDIA A100 80GB PCIe, 81920 MiB</div>
   <div class="fragment"><span class="p">[ibotca@univ-angers.fr@gnode2 ~]$ </span><span class="tape">micromamba activate llm</span></div>
-  <div class="fragment"><span class="p">(llm) [ibotca@univ-angers.fr@gnode2 ~]$ </span><span class="tape">nano requin.py</span></div>
+  <div class="fragment"><span class="p">(llm) [ibotca@univ-angers.fr@gnode2 ~]$ </span><span class="tape">nano logo_aouda.py</span></div>
   </pre>
   </div>
   </section>
   
-  
+
   <!-- ===== Démo 3 : le code dans nano ===== -->
   <section id="demo-nano">
-  <h3>Démo : le code</h3>
+  <h3>Le code python </h3>
   <div class="term">
-    <div class="barre"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>ivan@gnode2 — nano</span></div>
+    <div class="barre"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>ibotca@gnode3 — nano</span></div>
   <pre>
-  <div class="nano-haut">  GNU nano 7.2                         requin.py                                     </div>
-  <div class="fragment"><span class="com"># requin.py : un modèle de langue de 117 milliards de paramètres dessine pour nous</span>
+  <div class="nano-haut">  GNU nano 7.2                        logo_aouda.py                                  </div>
+  <div class="fragment"><span class="com"># logo_aouda.py : un modèle de langue de 117 milliards de paramètres dessine pour nous</span>
   import os, time
   from vllm import LLM, SamplingParams
   
   MODELE = <span class="str">f"/scratch/nautilus/users/{os.environ['USER']}/models/gpt-oss-120b"</span>
+
   DESSIN = open(<span class="str">"logo_nautilus.txt"</span>).read()          <span class="com"># le logo ASCII affiché à la connexion</span>
+
   QUESTION = (<span class="str">f"Voici le logo ASCII du supercalculateur Nautilus :\n\n{DESSIN}\n"</span>
-              <span class="str">"Dessine en ASCII art un requin qui dévore ce logo, en gardant le logo reconnaissable. "</span>
+              <span class="str">"GLiCID ouvre un nouveau cluster, Aouda, riche en GPU H200. Comme Nautilus, "</span>
+              <span class="str">"son nom vient de Jules Verne (Le Tour du monde en 80 jours). "</span>
+              <span class="str">"Dessine son logo en ASCII art dans le même style : le mot Aouda dans la même police, "</span>
+              <span class="str">"une illustration en dessous, puis « Welcome to GLiCID HPC cluster Aouda ». "</span>
+              <span class="str">"80 colonnes et 25 lignes maximum. "</span>
               <span class="str">"Réponds uniquement avec le dessin, sans bloc de code."</span>)</div>
   <div></div>
   <div class="fragment">print(<span class="str">"Chargement de gpt-oss-120b sur le GPU ..."</span>)
   t0 = time.time()
-  llm = LLM(model=MODELE, max_model_len=8192, enforce_eager=True)
+  llm = LLM(model=MODELE, max_model_len=16384, enforce_eager=True)
   print(<span class="str">f"Modèle chargé en {time.time() - t0:.0f} s\n"</span>)</div>
   <div></div>
-  <div class="fragment">params = SamplingParams(temperature=0.8, max_tokens=4096)
+  <div class="fragment">params = SamplingParams(temperature=0.8, max_tokens=12000)
   reponse = llm.chat([{<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: QUESTION}], params, use_tqdm=False,
-                    chat_template_kwargs={<span class="str">"reasoning_effort"</span>: <span class="str">"low"</span>})
+                    chat_template_kwargs={<span class="str">"reasoning_effort"</span>: <span class="str">"high"</span>})
   texte = reponse[0].outputs[0].text
   print(texte.split(<span class="str">"assistantfinal"</span>)[-1].strip())</div>
   <div></div>
@@ -693,36 +701,94 @@
   </div>
   </section>
   
-  
+    
   <!-- ===== Démo 4 : exécution ===== -->
+  <!-- Rien n'est indenté dans le <pre> : chaque espace en début de ligne s'affiche -->
   <section id="demo-run">
-  <h3>Démo : le modèle répond</h3>
+  <h3>La réponse du modèle</h3>
   <div class="term">
-    <div class="barre"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>ivan@gnode2 — python</span></div>
+  <div class="barre"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>ibotca@gnode3 — python</span></div>
   <pre>
-  <div><span class="p">(llm) [ivan@gnode2 ~]$ </span><span class="tape fragment">python requin.py</span></div>
+  <div><span class="p">(llm) ibotca@univ-angers.fr@gnode3:~/demo_llm$ </span><span class="tape fragment">python logo_aouda.py</span></div>
   <div class="fragment">Chargement de gpt-oss-120b sur le GPU ...</div>
-  <!-- À REMPLACER : temps de chargement réel -->
-  <div class="fragment">Modèle chargé en 214 s</div>
+  <div class="fragment">Modèle chargé en 302 s</div>
   <div></div>
-  <!-- À REMPLACER : colle ici le dessin réellement produit par le modèle -->
-  <div class="fragment stream">
-          [ colle ici le dessin produit par le modèle ]
-  
-  </div>
-  <div class="fragment"><span class="p">(llm) [ivan@gnode2 ~]$ </span><span class="curseur"></span></div>
+  <div class="fragment stream"> 
+    ___                  _                    .----------------------.
+   / _ \                | |                   | [H200] [H200] [H200] |
+  / /_\ \ ___  _   _  __| | __ _              | [H200] [H200] [H200] |
+  |  _  |/ _ \| | | |/ _` |/ _` |             | [H200] [H200] [H200] |
+  | | | | (_) | |_| | (_| | (_| |       ______|______________________|____
+  \_| |_/\___/ \__,_|\__,_|\__,_|      /  o                               \
+                                      /   __                               |
+                                     /   /  \_______    ________    ______/
+                                    (   (           |  |        |  |
+                                     \   \          |  |        |  |
+                                      \__/          |__|        |__|
+  -----------------------------------------------------------------------------
+    Welcome to GLiCID HPC cluster Aouda</div>
+  <div class="fragment"><span class="p">(llm) ibotca@univ-angers.fr@gnode3:~/demo_llm$ </span><span class="curseur"></span></div>
   </pre>
   </div>
+  </section>  
+  </section>
+
+
+    
+  <!-- Bibliographie -->
+  <section id="bibliographie">
+  <h3>Bibliographie</h3>
+  <div class="biblio">
+  
+  <h4>Histoire </h4>
+  <ol>
+    <li>J. McCarthy, M. Minsky, N. Rochester, C. Shannon (1955). <em>A Proposal for the Dartmouth Summer Research Project on Artificial Intelligence.</em></li>
+  </ol>
+  
+  <h4>Modèles de langue</h4>
+  <ol start="4">
+    <li>A. Vaswani <em>et al.</em> (2017). <em>Attention Is All You Need.</em> NeurIPS.</li>
+    <li>Qwen Team (2024). <em>Qwen2.5 Technical Report.</em>.</li>
+    <li>OpenAI (2025). <em>gpt-oss-120b &amp; gpt-oss-20b Model Card.</em>.</li>
+  </ol>
+  
+  <h4>Outils et calcul</h4>
+  <ol start="8">
+    <li>GLiCID, mésocentre des Pays de la Loire : <em>glicid.fr</em>, documentation <em>doc.glicid.fr</em>.</li>
+  </ol>
+  
+  </div>
   </section>
   
+  
+  <!-- Code de la présentation -->
+  <section id="code-presentation">
+  <h3>Le code de la présentation</h3>
+  <div class="code-grid">
+    <img class="qr" src="assets/img/qr_github.svg" alt="QR code vers le dépôt GitHub de la présentation">
+    <div>
+      <p class="url"><strong>github.com/Ivanbtz9/journee_IA_angers_22_octobre_2026</strong></p>
+      <div class="term">
+        <div class="barre"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>terminal</span></div>
+  <pre>
+  <div><span class="p">$ </span>git clone https://github.com/Ivanbtz9/journee_IA_angers_22_octobre_2026</div>
+  <div><span class="p">$ </span>cd journee_IA_angers_22_octobre_2026</div>
+  <div><span class="p">$ </span>npm install reveal.js@5.1.0 katex</div>
+  <div><span class="p">$ </span>python3 -m http.server 8000</div>
+  </pre>
+      </div>
+      <p class="url" style="margin-top: 0.6em">Tout le code des slides est en accès libre sur le dépôt.</p>
+    </div>
+  </div>
+  </section>
+  
+  
+  <!-- Conclusion -->
+  <section class="center">
+  <h2>Merci</h2>
+  <p class="small">Questions ?</p>
   </section>
 
-
-    <!-- Conclusion -->
-    <section class="center">
-      <h2>Merci</h2>
-      <p class="small">Questions ?</p>
-    </section>
 
   </div>
 </div>
@@ -802,6 +868,8 @@
   document.querySelectorAll('.term .stream').forEach(s =>
     s.style.setProperty('--l', s.textContent.split('\n').length));
 </script>
+
+
 
 </body>
 </html>

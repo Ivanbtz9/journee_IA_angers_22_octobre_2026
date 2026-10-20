@@ -466,12 +466,27 @@
   .reveal .term .curseur::after { content: "▋"; animation: clign 1s steps(1) infinite; }
   @keyframes clign { 50% { opacity: 0; } }
  
-  /* Sortie du modèle qui se déroule ligne par ligne */
-  .reveal .term .stream { overflow: hidden; max-height: 0; }
+  /* La place est réservée dès l'arrivée sur la slide : rien ne bouge ni ne déborde pendant l'animation */
+  .reveal .term .stream { clip-path: inset(0 0 100% 0); }
   .reveal .term .stream.visible {
     animation: deroule calc(var(--l) * 120ms) steps(var(--l)) forwards;
   }
-  @keyframes deroule { to { max-height: calc(var(--l) * 1.3em); } }
+  @keyframes deroule { to { clip-path: inset(0 0 0 0); } }
  
   /* Éditeur nano */
   .reveal .term .nano-haut, .reveal .term .nano-bas b { background: #d4d4d4; color: #1e1f22; }
+
+
+    .reveal .biblio { font-size: 0.5em; text-align: left; line-height: 1.35; }
+  .reveal .biblio h4 { font-size: 1.05em; margin: 0.7em 0 0.25em; text-transform: none; }
+  .reveal .biblio ol { margin: 0 0 0 1.2em; }
+  .reveal .biblio li { margin-bottom: 0.3em; }
+  .reveal .biblio .moi { font-weight: 600; }
+ 
+  .reveal .code-grid {
+    display: grid; grid-template-columns: auto 1fr; gap: 1.2em;
+    align-items: center; text-align: left;
+  }
+  .reveal .code-grid img.qr { width: 260px; margin: 0; box-shadow: none; }
+  .reveal .code-grid .url { font-size: 0.55em; margin: 0 0 0.6em; word-break: break-all; }
+  .reveal .code-grid .term pre { font-size: 12px; }
