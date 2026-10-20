@@ -571,31 +571,152 @@
 
     </section>
 
-    <!-- ========================================== -->
-    <!-- SECTION 3 : CAS PARTICULIER DES MODELES DE LANGUES -->
-    <!-- ========================================== -->
-    <section id="modeles-langues">
-      <h2>3. Cas particulier : les modèles de langues (LLMs)</h2>
-      <!-- <p>Contenu sur les LLM, architecture Transformer, etc...</p> -->
-      <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
+    
+<!-- ========================================== -->
+<!-- SECTION 3 : CAS PARTICULIER DES MODELES DE LANGUES -->
+<!-- ========================================== -->
+<section id="modeles-langues">
+  <h2>3. Cas particulier : les modèles de langues (LLMs)</h2>
+  <!-- <p>Contenu sur les LLM, architecture Transformer, etc...</p> -->
+  <p><a href="#/1" style="font-size: 0.5em; opacity: 0.6;">↩ Retour au programme</a></p>
+  </section>
+  
+  <section>
+    <section id="llm-definition">
+    <h3>Qu'est-ce qu'un LLM ?</h3>
+  
+    <ul style="font-size: 0.7em">
+    <li>Un <strong> gros modèle neuronale</strong> $f_\theta$ (milliards de paramètres) entraîné sur d'énormes corpus de textes.</li>
+    <li> <strong>Classification itérative</strong> : prédire le prochain mot parmi un vocabulaire fixe $\mathcal{V}$
+                  (≈ 150K tokens)</li>
+    <li><strong>Un Chatbot</strong> $\Rightarrow$ plusieurs modèles <strong>orchestrés</strong> autour d'un modèle de langue (voix, images, recherche web, sécurité, outils…)</li>
+    </ul>
+  
+    <video class="fragment" muted controls preload="auto" src="assets/videos/autoregressif.mp4"
+    style="display: block; max-height: 330px; width: auto; margin: 0.4em auto 0;"></video>
     </section>
+  
+  <!-- ===== Démo 1 : connexion ===== -->
+  <section id="demo-ssh">
+  <h3>Démo : connexion à Nautilus</h3>
+  <div class="term">
+    <div class="barre"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>ivan@portable — ssh</span></div>
+  <pre>
+  <div><span class="p">ivan@portable:~$ </span><span class="tape fragment">ssh nautilus</span></div>
+  <div class="fragment dim">#################################################################
+  #   This service is restricted to authorized users only. All    #
+  #            activities on this system are logged.              #
+  #################################################################
+  
+  Last login: Tue Oct 13 16:31:48 2026</div>
+  <div class="fragment">_   _             _   _ _                    lxkkdc
+  | \ | |           | | (_) |                   kWNOdc
+  |  \| | __ _ _   _| |_ _| |_   _ ___          kW0c
+  | . ` |/ _` | | | | __| | | | | / __|         kW0c
+  | |\  | (_| | |_| | |_| | | |_| \__ \         kW0c
+  \_| \_/\__,_|\__,_|\__|_|_|\__,_|___/        cOWKl
+                                          cx0KXWMWXK0xc
+                                  ccllllloxXWMMMMMMMMMWKo
+          coooolc       codxkO0KXXNNNWWWWWMMMMMMMMMMMMWOl
+          c0WWWWWO   oxOKNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWNKOxoc
+          lKMMMMMKxOXWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWXOdc
+          lKMMMMMWWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMW0xdx0NMMWKx
+          lKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWO     kWMMMWOc
+          lKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWOc    kWMMMMNd
+          lKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWKkxkKWMMMMMNd
+          lKMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMXx
+          lKMMMMMNNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWXkl
+          lKMMMMM0ookKNWMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMWNKOdc
+          ckKKKKKx    ldkOKXNWMMMMMMMMMMMMMMMMMMMMMMMWNXK0kdl
+                          clodxkkO000KKKKKKK000OOkxdolc
+  -----------------------------------------------------------------------------
+    Welcome to GLiCID HPC cluster Nautilus
+  
+  <span class="p">[ibotca@univ-angers.fr@nautilus ~]$ </span><span class="curseur"></span></div>
+  </pre>
+  </div>
+  </section>
+  
+  
+  <!-- ===== Démo 2 : réservation d'un GPU ===== -->
+  <section id="demo-srun">
+  <h3>Démo : réserver un GPU</h3>
+  <div class="term">
+    <div class="barre"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>ivan@nautilus — ssh</span></div>
+  <pre>
+  <div><span class="p">[ibotca@univ-angers.fr@nautilus ~]$ </span><span class="fragment"><span class="tape">srun -M nautilus --qos=debug -p gpu -C gpu_a100 --gres=gpu:1 \</span>
+  <span class="p">> </span><span class="tape suite">--time=00:20:00 --pty bash</span></span></div>
 
-    <section>
-      <section id="llm-definition">
-        <h3>Qu'est-ce qu'un LLM ?</h3>
+  <div class="fragment dim">srun: job 4242424 queued and waiting for resources
+  srun: job 4242424 has been allocated resources</div>
+  <!-- À REMPLACER : nom du nœud réel -->
+  <div class="fragment"><span class="p">[ibotca@univ-angers.fr@gnode2 ~]$ </span><span class="tape">nvidia-smi --query-gpu=name,memory.total --format=csv,noheader</span></div>
+  <div class="fragment">NVIDIA A100 80GB PCIe, 81920 MiB</div>
+  <div class="fragment"><span class="p">[ibotca@univ-angers.fr@gnode2 ~]$ </span><span class="tape">micromamba activate llm</span></div>
+  <div class="fragment"><span class="p">(llm) [ibotca@univ-angers.fr@gnode2 ~]$ </span><span class="tape">nano requin.py</span></div>
+  </pre>
+  </div>
+  </section>
+  
+  
+  <!-- ===== Démo 3 : le code dans nano ===== -->
+  <section id="demo-nano">
+  <h3>Démo : le code</h3>
+  <div class="term">
+    <div class="barre"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>ivan@gnode2 — nano</span></div>
+  <pre>
+  <div class="nano-haut">  GNU nano 7.2                         requin.py                                     </div>
+  <div class="fragment"><span class="com"># requin.py : un modèle de langue de 117 milliards de paramètres dessine pour nous</span>
+  import os, time
+  from vllm import LLM, SamplingParams
+  
+  MODELE = <span class="str">f"/scratch/nautilus/users/{os.environ['USER']}/models/gpt-oss-120b"</span>
+  DESSIN = open(<span class="str">"logo_nautilus.txt"</span>).read()          <span class="com"># le logo ASCII affiché à la connexion</span>
+  QUESTION = (<span class="str">f"Voici le logo ASCII du supercalculateur Nautilus :\n\n{DESSIN}\n"</span>
+              <span class="str">"Dessine en ASCII art un requin qui dévore ce logo, en gardant le logo reconnaissable. "</span>
+              <span class="str">"Réponds uniquement avec le dessin, sans bloc de code."</span>)</div>
+  <div></div>
+  <div class="fragment">print(<span class="str">"Chargement de gpt-oss-120b sur le GPU ..."</span>)
+  t0 = time.time()
+  llm = LLM(model=MODELE, max_model_len=8192, enforce_eager=True)
+  print(<span class="str">f"Modèle chargé en {time.time() - t0:.0f} s\n"</span>)</div>
+  <div></div>
+  <div class="fragment">params = SamplingParams(temperature=0.8, max_tokens=4096)
+  reponse = llm.chat([{<span class="str">"role"</span>: <span class="str">"user"</span>, <span class="str">"content"</span>: QUESTION}], params, use_tqdm=False,
+                    chat_template_kwargs={<span class="str">"reasoning_effort"</span>: <span class="str">"low"</span>})
+  texte = reponse[0].outputs[0].text
+  print(texte.split(<span class="str">"assistantfinal"</span>)[-1].strip())</div>
+  <div></div>
+  <div class="nano-bas"><b>^G</b> Aide      <b>^O</b> Écrire     <b>^W</b> Chercher   <b>^K</b> Couper     <b>^T</b> Exécuter
+  <b>^X</b> Quitter   <b>^R</b> Lire fich. <b>^\</b> Remplacer  <b>^U</b> Coller     <b>^J</b> Justifier</div>
+  </pre>
+  </div>
+  </section>
+  
+  
+  <!-- ===== Démo 4 : exécution ===== -->
+  <section id="demo-run">
+  <h3>Démo : le modèle répond</h3>
+  <div class="term">
+    <div class="barre"><i style="background:#ff5f57"></i><i style="background:#febc2e"></i><i style="background:#28c840"></i><span>ivan@gnode2 — python</span></div>
+  <pre>
+  <div><span class="p">(llm) [ivan@gnode2 ~]$ </span><span class="tape fragment">python requin.py</span></div>
+  <div class="fragment">Chargement de gpt-oss-120b sur le GPU ...</div>
+  <!-- À REMPLACER : temps de chargement réel -->
+  <div class="fragment">Modèle chargé en 214 s</div>
+  <div></div>
+  <!-- À REMPLACER : colle ici le dessin réellement produit par le modèle -->
+  <div class="fragment stream">
+          [ colle ici le dessin produit par le modèle ]
+  
+  </div>
+  <div class="fragment"><span class="p">(llm) [ivan@gnode2 ~]$ </span><span class="curseur"></span></div>
+  </pre>
+  </div>
+  </section>
+  
+  </section>
 
-        <ul style="font-size: 0.7em">
-          <li>Un <strong> gros modèle neuronale</strong> $f_\theta$ (milliards de paramètres) entraîné sur d'énormes corpus de textes.</li>
-          <li> <strong>Classification itérative</strong> : prédire le prochain mot parmi un vocabulaire fixe $\mathcal{V}$
-              (≈ 150K tokens)</li>
-          <li><strong>Un Chatbot</strong> $\Rightarrow$ plusieurs modèles <strong>orchestrés</strong> autour d'un modèle de langue (voix, images, recherche web, sécurité, outils…)</li>
-        </ul>
-
-        <video class="fragment" muted controls preload="auto" src="assets/videos/autoregressif.mp4"
-              style="display: block; max-height: 330px; width: auto; margin: 0.4em auto 0;"></video>
-        </section>
-
-      </section>
 
     <!-- Conclusion -->
     <section class="center">
@@ -673,5 +794,14 @@
     if (event.currentSlide.contains(slider)) slider.focus();
   });
 </script>
+
+<script>
+  // Longueur de chaque commande (vitesse de frappe) et nombre de lignes de la sortie du modèle
+  document.querySelectorAll('.term .tape').forEach(t =>
+    t.style.setProperty('--n', [...t.textContent].length));
+  document.querySelectorAll('.term .stream').forEach(s =>
+    s.style.setProperty('--l', s.textContent.split('\n').length));
+</script>
+
 </body>
 </html>

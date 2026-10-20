@@ -423,3 +423,55 @@
 }
 .reveal .glicid-table th { font-weight: 600; color: var(--accent); }
 .reveal .glicid-table td { white-space: nowrap; }
+
+
+  .reveal .term {
+    width: 96%; margin: 0 auto; text-align: left;
+    background: #1e1f22; color: #d4d4d4;
+    border-radius: 10px; overflow: hidden;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .35);
+  }
+  .reveal .term .barre {
+    display: flex; align-items: center; gap: 7px;
+    padding: 7px 12px; background: #2d2f33;
+    font: 12px/1 sans-serif; color: #9a9a9a;
+  }
+  .reveal .term .barre i { width: 11px; height: 11px; border-radius: 50%; display: inline-block; }
+  .reveal .term .barre span { margin-left: 10px; }
+  /* <pre> pour que KaTeX/MathJax ignorent les "$" des invites */
+  .reveal .term pre {
+    margin: 0; padding: 12px 16px; width: auto; box-shadow: none; background: none;
+    font: 13px/1.3 "DejaVu Sans Mono", Menlo, Consolas, monospace;
+    white-space: normal; word-wrap: normal; color: inherit;
+  }
+  .reveal .term pre > div { white-space: pre; min-height: 1.3em; }
+  .reveal .term .p { color: #8ae234; }            /* invite */
+  .reveal .term .dim { color: #8b8b8b; }          /* sorties secondaires */
+  .reveal .term .com { color: #8b8b8b; }          /* commentaires python */
+  .reveal .term .str { color: #e9b96e; }          /* chaînes python */
+  .reveal .slides section .term .fragment { transition: opacity .1s; }
+ 
+  /* Frappe au clavier : la commande s'écrit quand la ligne apparaît */
+  .reveal .term .tape {
+    display: inline-block; vertical-align: bottom;
+    overflow: hidden; white-space: pre; width: 0;
+  }
+  .reveal .term .visible .tape, .reveal .term .tape.visible {
+    animation: frappe min(calc(var(--n) * 45ms), 2.2s) steps(var(--n)) forwards;
+  }
+  .reveal .term .tape.suite { animation-delay: 2.3s; }   /* 2e ligne d'une commande coupée par \ */
+  @keyframes frappe { to { width: calc(var(--n) * 1ch); } }
+ 
+  /* Curseur clignotant */
+  .reveal .term .curseur::after { content: "▋"; animation: clign 1s steps(1) infinite; }
+  @keyframes clign { 50% { opacity: 0; } }
+ 
+  /* Sortie du modèle qui se déroule ligne par ligne */
+  .reveal .term .stream { overflow: hidden; max-height: 0; }
+  .reveal .term .stream.visible {
+    animation: deroule calc(var(--l) * 120ms) steps(var(--l)) forwards;
+  }
+  @keyframes deroule { to { max-height: calc(var(--l) * 1.3em); } }
+ 
+  /* Éditeur nano */
+  .reveal .term .nano-haut, .reveal .term .nano-bas b { background: #d4d4d4; color: #1e1f22; }
